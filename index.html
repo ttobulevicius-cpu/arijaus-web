@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PyroStore EU – Kokybiška Pirotechnika Visoje Europoje</title>
+  <!-- Tailwind CSS per CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome ikonos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: '#ff4d00',
+            brandDark: '#cc3d00',
+            darkBg: '#0f1115',
+            cardBg: '#181b22',
+            borderDark: '#2a2f3a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-darkBg text-gray-200 font-sans min-h-screen flex flex-col">
+
+  <!-- Viršutinė pranešimų juosta -->
+  <div class="bg-gradient-to-r from-red-600 to-brand text-white text-xs md:text-sm font-semibold py-2 px-4 text-center">
+    <span>🚀 Greitas & diskretiškas pristatymas visoje Europoje (ES) | 🔞 Parduodama tik asmenims nuo 18 metų!</span>
+  </div>
+
+  <!-- Navigacija -->
+  <header class="bg-cardBg border-b border-borderDark sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center text-white text-xl font-black shadow-lg shadow-brand/30">
+          🔥
+        </div>
+        <div>
+          <span class="text-2xl font-black tracking-wider text-white">PYRO<span class="text-brand">ZONE</span></span>
+          <span class="hidden sm:inline-block text-xs text-gray-400 block tracking-widest uppercase">EU Delivery</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="#katalogas" class="text-white hover:text-brand transition">Katalogas</a>
+        <a href="#pristatymas" class="text-gray-400 hover:text-white transition">Pristatymas Europoje</a>
+        <a href="#taisykles" class="text-gray-400 hover:text-white transition">Saugumas (18+)</a>
+      </nav>
+
+      <!-- Krepšelio mygtukas -->
+      <button onclick="toggleCart()" class="relative bg-darkBg hover:bg-borderDark border border-borderDark text-white px-4 py-2.5 rounded-xl flex items-center space-x-3 transition">
+        <i class="fa-solid fa-cart-shopping text-brand"></i>
+        <span class="font-bold text-sm">Krepšelis</span>
+        <span id="cart-count" class="bg-brand text-white text-xs font-black rounded-full h-5 w-5 flex items-center justify-center">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero sekcija -->
+  <section class="relative bg-gradient-to-b from-cardBg to-darkBg py-16 px-4 border-b border-borderDark">
+    <div class="max-w-5xl mx-auto text-center space-y-5">
+      <span class="inline-block bg-brand/10 text-brand border border-brand/30 rounded-full px-4 py-1 text-xs font-bold uppercase tracking-wider">
+        Sertifikuota Pirotechnika (CE)
+      </span>
+      <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight uppercase">
+        Galingiausios Petardos <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Pristatomos į visą Europą</span>
+      </h1>
+      <p class="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg">
+        Originalūs gamintojai: <strong>Piromax</strong>, <strong>Klásek</strong>, <strong>Triplex</strong>. Siunčiame saugiai supakuota tiesiai į jūsų nurodytą adresą ar paštomatą.
+      </p>
+      <div class="pt-2 flex flex-wrap justify-center gap-4 text-xs font-semibold text-gray-400">
+        <div class="flex items-center space-x-2 bg-darkBg px-3 py-2 rounded-lg border border-borderDark">
+          <i class="fa-solid fa-truck-fast text-brand"></i>
+          <span>ES Kurjeriai (3–5 d.d.)</span>
+        </div>
+        <div class="flex items-center space-x-2 bg-darkBg px-3 py-2 rounded-lg border border-borderDark">
+          <i class="fa-solid fa-shield-halved text-brand"></i>
+          <span>Diskretiška pakuotė</span>
+        </div>
+        <div class="flex items-center space-x-2 bg-darkBg px-3 py-2 rounded-lg border border-borderDark">
+          <i class="fa-solid fa-circle-check text-brand"></i>
+          <span>CE Sertifikatas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prekių katalogas -->
+  <main id="katalogas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <h2 class="text-3xl font-extrabold text-white">Prekių Asortimentas</h2>
+        <p class="text-gray-400 text-sm mt-1">Populiariausi modeliai sandėlyje</p>
+      </div>
+      <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">3 Prekės sandėlyje</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- 1 Prekė: Firecracker C4 20 pcs -->
+      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/50 transition duration-300 flex flex-col">
+        <div class="relative bg-darkBg h-64 p-6 flex items-center justify-center">
+          <span class="absolute top-3 left-3 bg-red-600/90 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded">
+            Populiaru
+          </span>
+          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80" 
+               alt="Firecracker C4 20 pcs" 
+               class="max-h-full object-contain filter drop-shadow-2xl rounded-lg">
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1">Piromax (PXP309)</div>
+            <h3 class="text-xl font-bold text-white mb-2">Firecracker C4 (20 vnt.)</h3>
+            <p class="text-gray-400 text-xs mb-4">
+              Klasikinė stipraus sprogimo petarda su dagtimi ir firminiu violetiniu popieriaus uždengimu. Aukštas slėgis ir itin garsus aidas.
+            </p>
+            <ul class="text-xs text-gray-300 space-y-1 mb-6 border-y border-borderDark py-3">
+              <li><strong class="text-gray-400">Kiekis:</strong> 20 vnt. dėžutėje</li>
+              <li><strong class="text-gray-400">Sprogiklis:</strong> Dagčių tipo (Friction/Fuse)</li>
+              <li><strong class="text-gray-400">Kategorija:</strong> CE 1395</li>
+            </ul>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <div>
+              <span class="text-xs text-gray-400 block">Kaina</span>
+              <span class="text-2xl font-black text-white">13.99 €</span>
+            </div>
+            <button onclick="addToCart('Firecracker C4 (20 pcs)', 13.99)" class="bg-brand hover:bg-brandDark text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center space-x-2 text-sm">
+              <i class="fa-solid fa-plus"></i>
+              <span>Į krepšelį</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 Prekė: Dumbum 2g Edition P1 20pcs -->
+      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/50 transition duration-300 flex flex-col">
+        <div class="relative bg-darkBg h-64 p-6 flex items-center justify-center">
+          <span class="absolute top-3 left-3 bg-emerald-600/90 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded">
+            P1 Sertifikuota
+          </span>
+          <img src="https://images.unsplash.com/photo-1527786356703-4b100091cd2c?auto=format&fit=crop&w=600&q=80" 
+               alt="Dumbum 2g Edition P1 20pcs" 
+               class="max-h-full object-contain filter drop-shadow-2xl rounded-lg">
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1">Klásek Trading</div>
+            <h3 class="text-xl font-bold text-white mb-2">Dumbum 2g Edition P1 (20 vnt.)</h3>
+            <p class="text-gray-400 text-xs mb-4">
+              Vienos garsiausių serijos petardų Europoje. Žalias šviesos efektas prieš galingą detonaciją. 2g grynojo pirotechninio mišinio.
+            </p>
+            <ul class="text-xs text-gray-300 space-y-1 mb-6 border-y border-borderDark py-3">
+              <li><strong class="text-gray-400">Kiekis:</strong> 20 vnt. dėžutėje</li>
+              <li><strong class="text-gray-400">NEC/NEM:</strong> 2.0g / vnt.</li>
+              <li><strong class="text-gray-400">Kategorija:</strong> P1 (CE 0163)</li>
+            </ul>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <div>
+              <span class="text-xs text-gray-400 block">Kaina</span>
+              <span class="text-2xl font-black text-white">12.50 €</span>
+            </div>
+            <button onclick="addToCart('Dumbum 2g Edition P1 (20 vnt.)', 12.50)" class="bg-brand hover:bg-brandDark text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center space-x-2 text-sm">
+              <i class="fa-solid fa-plus"></i>
+              <span>Į krepšelį</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Prekė: Killer Bulldog 2g -->
+      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/50 transition duration-300 flex flex-col">
+        <div class="relative bg-darkBg h-64 p-6 flex items-center justify-center">
+          <span class="absolute top-3 left-3 bg-amber-600/90 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded">
+            Triplex Bestseleris
+          </span>
+          <img src="https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?auto=format&fit=crop&w=600&q=80" 
+               alt="Killer Bulldog 2g" 
+               class="max-h-full object-contain filter drop-shadow-2xl rounded-lg">
+        </div>
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1">Triplex (XP1030)</div>
+            <h3 class="text-xl font-bold text-white mb-2">Killer Bulldog 2g</h3>
+            <p class="text-gray-400 text-xs mb-4">
+              „Killer Bulldog“ serija pasižymi ypatingai giliu ir trenksmingu bosiniu garso bangos efektu. Patikimas dagties uždegimas.
+            </p>
+            <ul class="text-xs text-gray-300 space-y-1 mb-6 border-y border-borderDark py-3">
+              <li><strong class="text-gray-400">Kiekis:</strong> Pakuotė (20 vnt.)</li>
+              <li><strong class="text-gray-400">NEC/NEM:</strong> ~2.0g / vnt.</li>
+              <li><strong class="text-gray-400">Gamintojo kodas:</strong> XP1030</li>
+            </ul>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <div>
+              <span class="text-xs text-gray-400 block">Kaina</span>
+              <span class="text-2xl font-black text-white">11.90 €</span>
+            </div>
+            <button onclick="addToCart('Killer Bulldog 2g', 11.90)" class="bg-brand hover:bg-brandDark text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center space-x-2 text-sm">
+              <i class="fa-solid fa-plus"></i>
+              <span>Į krepšelį</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Informacija apie siuntimą Europoje -->
+  <section id="pristatymas" class="bg-cardBg border-t border-borderDark py-12 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="flex items-start space-x-4">
+        <div class="text-3xl text-brand"><i class="fa-solid fa-earth-europe"></i></div>
+        <div>
+          <h4 class="text-white font-bold text-base mb-1">Siuntimas į visas ES šalis</h4>
+          <p class="text-gray-400 text-xs leading-relaxed">
+            Pristatome į Vokietiją, Lenkiją, Latviją, Estiją, Čekiją, Prancūziją ir kitas Europos šalis per patikimas kurjerių tarnybas.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start space-x-4">
+        <div class="text-3xl text-brand"><i class="fa-solid fa-box"></i></div>
+        <div>
+          <h4 class="text-white font-bold text-base mb-1">100% Diskretiškumas</h4>
+          <p class="text-gray-400 text-xs leading-relaxed">
+            Prekės pakuojamos į neutralias rudas dėžes be jokių išorinių žymėjimų ar nuorodų į pirotechniką.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-start space-x-4" id="taisykles">
+        <div class="text-3xl text-brand"><i class="fa-solid fa-id-card"></i></div>
+        <div>
+          <h4 class="text-white font-bold text-base mb-1">Amžiaus cenzas (N-18)</h4>
+          <p class="text-gray-400 text-xs leading-relaxed">
+            Užsakymai vykdomi tik asmenims, sulaukusiems 18 metų. Kurjeris atsiėmimo metu gali paprašyti asmens dokumento.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Šoninis krepšelis (Cart Drawer) -->
+  <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-full flex pl-10 z-50 transform translate-x-full transition-transform duration-300">
+    <div class="w-screen max-w-md bg-cardBg border-l border-borderDark flex flex-col justify-between shadow-2xl">
+      <div class="p-6 overflow-y-auto">
+        <div class="flex justify-between items-center pb-4 border-b border-borderDark">
+          <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+            <i class="fa-solid fa-bag-shopping text-brand"></i>
+            <span>Jūsų Krepšelis</span>
+          </h3>
+          <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+        </div>
+
+        <div id="cart-items" class="divide-y divide-borderDark my-4">
+          <!-- Dinaminės prekės bus čia -->
+          <p id="empty-msg" class="text-center py-12 text-sm text-gray-500">Krepšelis tuščias.</p>
+        </div>
+      </div>
+
+      <div class="p-6 bg-darkBg border-t border-borderDark space-y-4">
+        <div class="flex justify-between text-base font-bold text-white">
+          <span>Bendra suma:</span>
+          <span id="cart-total">0.00 €</span>
+        </div>
+        <p class="text-[11px] text-gray-400 text-center">Siuntimo kaina įskaičiuojama sekančiame žingsnyje pasirinkus šalį.</p>
+        <button onclick="checkout()" class="w-full bg-brand hover:bg-brandDark text-white font-bold py-3.5 rounded-xl transition text-center shadow-lg shadow-brand/20">
+          Pereiti prie apmokėjimo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Užtemdymo fonas krepšeliui -->
+  <div id="backdrop" onclick="toggleCart()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden"></div>
+
+  <!-- Footeris -->
+  <footer class="bg-darkBg border-t border-borderDark text-center py-6 text-xs text-gray-500">
+    <p>© 2026 PyroZone. Visos teisės saugomos. Pirotechnikos naudojimas privalo atitikti vietinius ES šalių įstatymus.</p>
+  </footer>
+
+  <!-- Paprastas JS Krepšelio funkcionalumas -->
+  <script>
+    let cart = [];
+
+    function toggleCart() {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('backdrop');
+      drawer.classList.toggle('translate-x-full');
+      backdrop.classList.toggle('hidden');
+    }
+
+    function addToCart(title, price) {
+      const existing = cart.find(item => item.title === title);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ title, price, qty: 1 });
+      }
+      updateCartUI();
+      // Atidaryti krepšelį pridėjus
+      const drawer = document.getElementById('cart-drawer');
+      if (drawer.classList.contains('translate-x-full')) {
+        toggleCart();
+      }
+    }
+
+    function removeFromCart(title) {
+      cart = cart.filter(item => item.title !== title);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById('cart-items');
+      const totalEl = document.getElementById('cart-total');
+      const countEl = document.getElementById('cart-count');
+      const emptyMsg = document.getElementById('empty-msg');
+
+      container.innerHTML = '';
+      let total = 0;
+      let totalQty = 0;
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-center py-12 text-sm text-gray-500">Krepšelis tuščias.</p>';
+      } else {
+        cart.forEach(item => {
+          total += item.price * item.qty;
+          totalQty += item.qty;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'py-3 flex justify-between items-center';
+          itemEl.innerHTML = `
+            <div>
+              <h5 class="text-white text-xs font-bold leading-snug">${item.title}</h5>
+              <div class="text-[11px] text-gray-400">${item.qty} vnt. x ${item.price.toFixed(2)} €</div>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="text-sm font-bold text-white">${(item.price * item.qty).toFixed(2)} €</span>
+              <button onclick="removeFromCart('${item.title}')" class="text-red-400 hover:text-red-300 text-xs">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+          `;
+          container.appendChild(itemEl);
+        });
+      }
+
+      totalEl.innerText = `${total.toFixed(2)} €`;
+      countEl.innerText = totalQty;
+    }
+
+    function checkout() {
+      if(cart.length === 0) {
+        alert("Pirmiausia pridėkite prekių į krepšelį!");
+        return;
+      }
+      alert("Nukreipiama į saugų apmokėjimo langą. Pasirinkite pristatymo šalį Europoje!");
+    }
+  </script>
+</body>
+</html>
