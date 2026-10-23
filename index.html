@@ -395,7 +395,7 @@
 
       <div class="space-y-4">
         
-        <!-- FAQ 1: Locker Pickup -->
+        <!-- FAQ 1 -->
         <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
           <button onclick="toggleFaq(1)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
             <span>How does Parcel Locker pickup work?</span>
@@ -406,7 +406,7 @@
           </div>
         </div>
 
-        <!-- FAQ 2: Countries Supported -->
+        <!-- FAQ 2 -->
         <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
           <button onclick="toggleFaq(2)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
             <span>Do you ship to my country in Europe?</span>
@@ -417,7 +417,7 @@
           </div>
         </div>
 
-        <!-- FAQ 3: Packaging & Discretion -->
+        <!-- FAQ 3 -->
         <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
           <button onclick="toggleFaq(3)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
             <span>Is the packaging 100% discreet?</span>
@@ -428,7 +428,7 @@
           </div>
         </div>
 
-        <!-- FAQ 4: Delivery Transit Times -->
+        <!-- FAQ 4 -->
         <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
           <button onclick="toggleFaq(4)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
             <span>How long does shipping take?</span>
@@ -439,7 +439,7 @@
           </div>
         </div>
 
-        <!-- FAQ 5: Bank Transfer Process -->
+        <!-- FAQ 5 -->
         <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
           <button onclick="toggleFaq(5)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
             <span>How does SEPA Bank Transfer work?</span>
@@ -450,7 +450,7 @@
           </div>
         </div>
 
-        <!-- FAQ 6: Age Policy -->
+        <!-- FAQ 6 -->
         <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
           <button onclick="toggleFaq(6)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
             <span>What is the minimum age requirement?</span>
@@ -531,7 +531,7 @@
             <input required type="text" id="cust-name" placeholder="John Doe" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
           </div>
 
-          <!-- Phone & Email (Crucial for Locker PIN) -->
+          <!-- Phone & Email -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block text-gray-300 font-semibold mb-1">
@@ -540,26 +540,42 @@
               <input required type="tel" id="cust-phone" placeholder="+49 170 000000 / +33..." class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             </div>
             <div>
-              <label class="block text-gray-300 font-semibold mb-1">Email Address</label>
+              <label class="block text-gray-300 font-semibold mb-1">
+                Email Address <span class="text-brand font-bold">*Payment Copy Sent Here</span>
+              </label>
               <input required type="email" id="cust-email" placeholder="john@example.com" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             </div>
           </div>
 
-          <!-- Country & City -->
+          <!-- ALL CONTINENTAL EU COUNTRIES -->
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-gray-300 font-semibold mb-1">Locker Country</label>
+              <label class="block text-gray-300 font-semibold mb-1">Locker Country (EU)</label>
               <select id="cust-country" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
-                <option value="Germany">Germany</option>
-                <option value="Poland">Poland</option>
-                <option value="France">France</option>
-                <option value="Czechia">Czechia</option>
                 <option value="Austria">Austria</option>
-                <option value="Netherlands">Netherlands</option>
                 <option value="Belgium">Belgium</option>
+                <option value="Bulgaria">Bulgaria</option>
+                <option value="Croatia">Croatia</option>
+                <option value="Czechia">Czechia</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Estonia">Estonia</option>
+                <option value="Finland">Finland</option>
+                <option value="France">France</option>
+                <option value="Germany" selected>Germany</option>
+                <option value="Greece">Greece</option>
+                <option value="Hungary">Hungary</option>
+                <option value="Ireland">Ireland</option>
                 <option value="Italy">Italy</option>
+                <option value="Latvia">Latvia</option>
+                <option value="Luxembourg">Luxembourg</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Poland">Poland</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Romania">Romania</option>
+                <option value="Slovakia">Slovakia</option>
+                <option value="Slovenia">Slovenia</option>
                 <option value="Spain">Spain</option>
-                <option value="Other EU">Other EU Country</option>
+                <option value="Sweden">Sweden</option>
               </select>
             </div>
             <div>
@@ -611,6 +627,17 @@
           </div>
           <h3 class="text-xl font-black text-white">Locker Order Reserved!</h3>
           <p class="text-xs text-accentGray">Transfer the total amount via SEPA to dispatch your locker package:</p>
+        </div>
+
+        <!-- Automated Email Sent Notification Box -->
+        <div class="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl text-center space-y-1">
+          <div class="text-xs font-bold text-emerald-400 flex items-center justify-center space-x-1.5">
+            <i class="fa-solid fa-envelope-circle-check"></i>
+            <span>Payment Instructions Sent to Email</span>
+          </div>
+          <p class="text-[11px] text-gray-300">
+            A copy of these instructions has been sent to: <strong id="summary-email-copy" class="text-white"></strong>. You can safely close this window anytime.
+          </p>
         </div>
 
         <!-- Bank Details Card -->
@@ -839,7 +866,7 @@
       document.getElementById('checkout-modal').classList.add('hidden');
     }
 
-    // SUBMIT ORDER & SEND DIRECTLY TO GOOGLE SHEETS
+    // SUBMIT ORDER & SEND DIRECTLY TO GOOGLE SHEETS + TRIGGER EMAIL
     async function processOrder(e) {
       e.preventDefault();
       
@@ -874,7 +901,7 @@
         total: `€${grandTotal}`
       };
 
-      // Send to Google Sheets Webhook in background
+      // Send to Google Sheets Webhook (which saves the order AND emails the customer)
       try {
         await fetch(GOOGLE_SHEET_URL, {
           method: 'POST',
@@ -886,12 +913,13 @@
         console.warn("Sheet logging offline or network busy", err);
       }
 
-      // Populate Step 2 Bank & Locker Info
+      // Populate Step 2 Bank, Locker & Email Confirmation Info
       document.getElementById('order-ref').innerText = orderNum;
       document.getElementById('order-ref-reminder').innerText = orderNum;
       document.getElementById('order-final-amount').innerText = `€${grandTotal}`;
       document.getElementById('summary-locker').innerText = `${carrier} - ${locker}`;
       document.getElementById('summary-phone').innerText = phone;
+      document.getElementById('summary-email-copy').innerText = email;
 
       // Switch to Bank Transfer view
       document.getElementById('checkout-step-1').classList.add('hidden');
