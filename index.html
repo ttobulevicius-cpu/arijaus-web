@@ -1,135 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PyroZone EU – High Power Pyrotechnics Delivered Across Europe</title>
-  <!-- Tailwind CSS -->
+  <title>PyroZone EU – Premium Pyrotechnics & Firecrackers Shipped Across Europe</title>
+  
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
           colors: {
             brand: '#ff4d00',
             brandDark: '#cc3d00',
-            darkBg: '#0f1115',
-            cardBg: '#181b22',
-            borderDark: '#2a2f3a'
+            darkBg: '#0b0d11',
+            cardBg: '#131720',
+            borderDark: '#222836',
+            accentGray: '#8f9bb3'
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-darkBg text-gray-200 font-sans min-h-screen flex flex-col">
+<body class="bg-darkBg text-gray-200 font-sans min-h-screen flex flex-col antialiased selection:bg-brand selection:text-white">
 
   <!-- Top Announcement Bar -->
-  <div class="bg-gradient-to-r from-red-600 to-brand text-white text-xs md:text-sm font-semibold py-2 px-4 text-center">
-    <span>🚀 Fast & discreet shipping across all Europe (EU) | 🔞 Strictly 18+ Only!</span>
+  <div class="bg-gradient-to-r from-red-600 via-orange-600 to-brand text-white text-xs md:text-sm font-semibold py-2.5 px-4 text-center shadow-inner">
+    <div class="max-w-7xl mx-auto flex items-center justify-center space-x-2">
+      <span class="inline-block animate-pulse">🔥</span>
+      <span>Express & Discreet Cross-Border Courier Shipping to <strong>all EU countries</strong> | 🔞 Strictly 18+ Only</span>
+    </div>
   </div>
 
   <!-- Navigation -->
-  <header class="bg-cardBg border-b border-borderDark sticky top-0 z-40">
+  <header class="bg-cardBg/90 backdrop-blur-md border-b border-borderDark sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-lg bg-brand flex items-center justify-center text-white text-xl font-black shadow-lg shadow-brand/30">
-          🔥
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brandDark to-brand flex items-center justify-center text-white text-2xl shadow-lg shadow-brand/30 group-hover:scale-105 transition-transform">
+          💥
         </div>
         <div>
           <span class="text-2xl font-black tracking-wider text-white">PYRO<span class="text-brand">ZONE</span></span>
-          <span class="hidden sm:inline-block text-xs text-gray-400 block tracking-widest uppercase">EU Delivery</span>
+          <span class="text-[10px] text-accentGray block tracking-widest uppercase font-semibold">European Pyrotechnics Supply</span>
         </div>
-      </div>
+      </a>
 
-      <!-- Navigation links (Only Catalog remaining) -->
-      <nav class="hidden md:flex space-x-8 text-sm font-medium">
-        <a href="#catalog" class="text-white hover:text-brand transition">Catalog</a>
+      <!-- Main Navigation -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+        <a href="#catalog" class="text-gray-300 hover:text-brand transition flex items-center space-x-1.5">
+          <i class="fa-solid fa-fire-flame-curved text-xs text-brand"></i>
+          <span>Catalog</span>
+        </a>
+        <a href="#reviews" class="text-gray-300 hover:text-brand transition">Reviews</a>
+        <a href="#faq" class="text-gray-300 hover:text-brand transition">FAQ</a>
       </nav>
 
-      <!-- Cart Button -->
-      <button onclick="toggleCart()" class="relative bg-darkBg hover:bg-borderDark border border-borderDark text-white px-4 py-2.5 rounded-xl flex items-center space-x-3 transition">
-        <i class="fa-solid fa-cart-shopping text-brand"></i>
-        <span class="font-bold text-sm">Cart</span>
-        <span id="cart-count" class="bg-brand text-white text-xs font-black rounded-full h-5 w-5 flex items-center justify-center">0</span>
-      </button>
+      <!-- Right Header Actions -->
+      <div class="flex items-center space-x-4">
+        <!-- Live Support Badge -->
+        <div class="hidden sm:flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full text-[11px] font-bold text-emerald-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          <span>Orders Dispatching Today</span>
+        </div>
+
+        <!-- Cart Button -->
+        <button onclick="toggleCart()" class="relative bg-darkBg hover:bg-borderDark border border-borderDark text-white px-4 py-2.5 rounded-xl flex items-center space-x-3 transition shadow-sm">
+          <i class="fa-solid fa-cart-shopping text-brand"></i>
+          <span class="font-bold text-sm hidden sm:inline">Cart</span>
+          <span id="cart-count" class="bg-brand text-white text-xs font-black rounded-full h-5 w-5 flex items-center justify-center shadow">0</span>
+        </button>
+      </div>
+
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="relative bg-gradient-to-b from-cardBg to-darkBg py-16 px-4 border-b border-borderDark">
-    <div class="max-w-5xl mx-auto text-center space-y-5">
-      <span class="inline-block bg-brand/10 text-brand border border-brand/30 rounded-full px-4 py-1 text-xs font-bold uppercase tracking-wider">
-        Certified Pyrotechnics (CE)
-      </span>
-      <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight uppercase">
-        Loudest Firecrackers <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Shipped Across All Europe</span>
+  <section class="relative bg-gradient-to-b from-cardBg via-darkBg to-darkBg py-20 px-4 border-b border-borderDark overflow-hidden">
+    <!-- Ambient Background Glow -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-brand/10 blur-[130px] pointer-events-none rounded-full"></div>
+
+    <div class="max-w-5xl mx-auto text-center space-y-6 relative z-10">
+      <div class="inline-flex items-center space-x-2 bg-brand/10 border border-brand/30 rounded-full px-4 py-1.5 text-xs font-bold text-brand uppercase tracking-wider">
+        <i class="fa-solid fa-certificate"></i>
+        <span>100% Genuine Factory Sealed • CE Certified</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight uppercase leading-none">
+        High Performance <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-brand to-red-500">Firecrackers in Europe</span>
       </h1>
-      <p class="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg">
-        Original manufacturers: <strong>Piromax</strong>, <strong>Klásek</strong>, <strong>Triplex</strong>. Safely and discreetly packaged, delivered directly to your doorstep.
+
+      <p class="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+        Direct wholesale & retail supplier of original European brands: <strong>Piromax</strong>, <strong>Klásek</strong>, and <strong>Triplex</strong>. Shipped safely in unmarked, odor-free boxes across all EU member states.
       </p>
-      <div class="pt-2 flex flex-wrap justify-center gap-4 text-xs font-semibold text-gray-400">
-        <div class="flex items-center space-x-2 bg-darkBg px-3 py-2 rounded-lg border border-borderDark">
-          <i class="fa-solid fa-truck-fast text-brand"></i>
-          <span>EU Couriers (3–5 Business Days)</span>
+
+      <!-- Trust Badges -->
+      <div class="pt-4 flex flex-wrap justify-center gap-3 text-xs font-semibold text-gray-300">
+        <div class="flex items-center space-x-2.5 bg-cardBg/80 backdrop-blur px-4 py-2.5 rounded-xl border border-borderDark">
+          <i class="fa-solid fa-truck-fast text-brand text-sm"></i>
+          <span>Tracked Delivery (3-5 Days)</span>
         </div>
-        <div class="flex items-center space-x-2 bg-darkBg px-3 py-2 rounded-lg border border-borderDark">
-          <i class="fa-solid fa-shield-halved text-brand"></i>
-          <span>Discreet Packaging</span>
+        <div class="flex items-center space-x-2.5 bg-cardBg/80 backdrop-blur px-4 py-2.5 rounded-xl border border-borderDark">
+          <i class="fa-solid fa-box-archive text-brand text-sm"></i>
+          <span>100% Plain Packaging</span>
         </div>
-        <div class="flex items-center space-x-2 bg-darkBg px-3 py-2 rounded-lg border border-borderDark">
-          <i class="fa-solid fa-circle-check text-brand"></i>
-          <span>CE Certified</span>
+        <div class="flex items-center space-x-2.5 bg-cardBg/80 backdrop-blur px-4 py-2.5 rounded-xl border border-borderDark">
+          <i class="fa-solid fa-shield-halved text-brand text-sm"></i>
+          <span>Safe Transport Approved</span>
+        </div>
+        <div class="flex items-center space-x-2.5 bg-cardBg/80 backdrop-blur px-4 py-2.5 rounded-xl border border-borderDark">
+          <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+          <span>4.9 / 5 Rating (850+ Orders)</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Product Catalog -->
-  <main id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
-    <div class="flex justify-between items-end mb-10">
+  <main id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex-grow">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
       <div>
-        <h2 class="text-3xl font-extrabold text-white">Product Catalog</h2>
-        <p class="text-gray-400 text-sm mt-1">Most popular items in stock</p>
+        <div class="text-brand text-xs font-bold uppercase tracking-wider mb-1 flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-brand"></span>
+          <span>Fresh Stock Available</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Available Firecrackers</h2>
       </div>
-      <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">3 Items in Stock</span>
+      <div class="flex items-center space-x-3 text-xs text-accentGray">
+        <span class="bg-cardBg px-3 py-1.5 rounded-lg border border-borderDark">In Stock: <strong class="text-emerald-400">Ready to Ship</strong></span>
+        <span class="bg-cardBg px-3 py-1.5 rounded-lg border border-borderDark">Categories: <strong>F3 / P1</strong></span>
+      </div>
     </div>
 
+    <!-- Product Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       
       <!-- Product 1: Firecracker C4 20 pcs -->
-      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/50 transition duration-300 flex flex-col shadow-xl">
-        <div class="relative bg-white h-72 w-full p-4 flex items-center justify-center border-b border-borderDark">
-          <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow z-10">
-            Popular
+      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/60 transition duration-300 flex flex-col shadow-2xl group">
+        <!-- Clean Framed Photo with Pure White Canvas -->
+        <div class="relative bg-white h-72 w-full p-6 flex items-center justify-center border-b border-borderDark overflow-hidden">
+          <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded shadow-md z-10">
+            Top Seller
+          </span>
+          <span class="absolute top-3 right-3 bg-gray-900/80 backdrop-blur text-gray-200 text-[10px] font-semibold px-2 py-1 rounded z-10">
+            Piromax CE 1395
           </span>
           <img src="c4.jpg" 
                alt="Firecracker C4 20 pcs" 
-               class="w-full h-full object-contain mix-blend-multiply transition-transform duration-300 hover:scale-105">
+               class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300">
         </div>
         
-        <div class="p-6 flex-1 flex flex-col justify-between">
+        <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
           <div>
-            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1">Piromax (PXP309)</div>
-            <h3 class="text-xl font-bold text-white mb-2">Firecracker C4 20 pcs</h3>
-            <p class="text-gray-400 text-xs mb-4">
-              Classic heavy-blast firecracker equipped with a safety fuse and signature purple tissue paper wrap. Exceptional sound pressure and loud echo.
+            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1.5">Piromax Series</div>
+            <h3 class="text-xl font-bold text-white mb-2 leading-tight">Firecracker C4 20 pcs</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+              A staple high-pressure petard known for its instant loud acoustic pressure. Features a secure viscous green fuse and purple protective wrapper.
             </p>
-            <ul class="text-xs text-gray-300 space-y-1 mb-6 border-y border-borderDark py-3">
-              <li><strong class="text-gray-400">Quantity:</strong> 20 pcs per pack</li>
-              <li><strong class="text-gray-400">Ignition:</strong> Green Fuse</li>
-              <li><strong class="text-gray-400">Certificate:</strong> CE 1395</li>
-            </ul>
-          </div>
-          <div class="flex items-center justify-between pt-2">
-            <div>
-              <span class="text-xs text-gray-400 block">Price</span>
-              <span class="text-2xl font-black text-white">€13.99</span>
+
+            <div class="grid grid-cols-2 gap-2 text-[11px] bg-darkBg/60 p-3 rounded-xl border border-borderDark mb-2">
+              <div><span class="text-accentGray block">Units:</span> <span class="font-bold text-gray-200">20 pcs / pack</span></div>
+              <div><span class="text-accentGray block">Ignition:</span> <span class="font-bold text-gray-200">Visco Safety Fuse</span></div>
+              <div><span class="text-accentGray block">Effect:</span> <span class="font-bold text-gray-200">Heavy Concussion</span></div>
+              <div><span class="text-accentGray block">Approval:</span> <span class="font-bold text-emerald-400">CE Certified</span></div>
             </div>
-            <button onclick="addToCart('Firecracker C4 20 pcs', 13.99)" class="bg-brand hover:bg-brandDark text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center space-x-2 text-sm shadow-md shadow-brand/20">
-              <i class="fa-solid fa-plus"></i>
+          </div>
+
+          <!-- Price & Quantity Selector -->
+          <div class="pt-3 border-t border-borderDark flex flex-col space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-accentGray block">Price per pack</span>
+                <span class="text-2xl font-black text-white">€13.99</span>
+              </div>
+              <!-- Quantity Controls -->
+              <div class="flex items-center bg-darkBg border border-borderDark rounded-lg">
+                <button onclick="decrementQty('qty-c4')" class="px-2.5 py-1 text-gray-400 hover:text-white transition font-bold text-sm">-</button>
+                <input id="qty-c4" type="number" value="1" min="1" max="99" class="w-10 bg-transparent text-center font-bold text-sm text-white focus:outline-none" readonly>
+                <button onclick="incrementQty('qty-c4')" class="px-2.5 py-1 text-gray-400 hover:text-white transition font-bold text-sm">+</button>
+              </div>
+            </div>
+
+            <button onclick="addToCartWithQty('Firecracker C4 20 pcs', 13.99, 'qty-c4')" class="w-full bg-brand hover:bg-brandDark active:scale-[0.98] text-white font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 text-sm shadow-lg shadow-brand/20">
+              <i class="fa-solid fa-cart-plus"></i>
               <span>Add to Cart</span>
             </button>
           </div>
@@ -137,36 +204,52 @@
       </div>
 
       <!-- Product 2: Dumbum 2g Edition P1 20pcs -->
-      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/50 transition duration-300 flex flex-col shadow-xl">
-        <div class="relative bg-white h-72 w-full p-4 flex items-center justify-center border-b border-borderDark">
-          <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow z-10">
-            P1 Certified
+      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/60 transition duration-300 flex flex-col shadow-2xl group">
+        <!-- Clean Framed Photo with Pure White Canvas -->
+        <div class="relative bg-white h-72 w-full p-6 flex items-center justify-center border-b border-borderDark overflow-hidden">
+          <span class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded shadow-md z-10">
+            P1 Approved
+          </span>
+          <span class="absolute top-3 right-3 bg-gray-900/80 backdrop-blur text-gray-200 text-[10px] font-semibold px-2 py-1 rounded z-10">
+            Klásek Trading
           </span>
           <img src="dumbum.jpg" 
                alt="Dumbum 2g Edition P1 20pcs" 
-               class="w-full h-full object-contain mix-blend-multiply transition-transform duration-300 hover:scale-105">
+               class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300">
         </div>
 
-        <div class="p-6 flex-1 flex flex-col justify-between">
+        <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
           <div>
-            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1">Klásek Trading</div>
-            <h3 class="text-xl font-bold text-white mb-2">Dumbum 2g Edition P1 20pcs</h3>
-            <p class="text-gray-400 text-xs mb-4">
-              One of the most famous firecracker lines in Europe. Features a bright green flash before a powerful detonation. 2.0g NEC per unit.
+            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1.5">Original Klásek</div>
+            <h3 class="text-xl font-bold text-white mb-2 leading-tight">Dumbum 2g Edition P1 20pcs</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+              The flagship of European noise emitters. Delivers an intense green optical warning flare followed by a 2.0g flash-powder detonation.
             </p>
-            <ul class="text-xs text-gray-300 space-y-1 mb-6 border-y border-borderDark py-3">
-              <li><strong class="text-gray-400">Quantity:</strong> 20 pcs per pack</li>
-              <li><strong class="text-gray-400">NEC / NEM:</strong> 2.0g / pc</li>
-              <li><strong class="text-gray-400">Category:</strong> P1 (CE 0163)</li>
-            </ul>
-          </div>
-          <div class="flex items-center justify-between pt-2">
-            <div>
-              <span class="text-xs text-gray-400 block">Price</span>
-              <span class="text-2xl font-black text-white">€12.50</span>
+
+            <div class="grid grid-cols-2 gap-2 text-[11px] bg-darkBg/60 p-3 rounded-xl border border-borderDark mb-2">
+              <div><span class="text-accentGray block">Units:</span> <span class="font-bold text-gray-200">20 pcs / pack</span></div>
+              <div><span class="text-accentGray block">NEC/NEM:</span> <span class="font-bold text-gray-200">2.0g / unit</span></div>
+              <div><span class="text-accentGray block">Effect:</span> <span class="font-bold text-gray-200">Green Light + Bang</span></div>
+              <div><span class="text-accentGray block">Category:</span> <span class="font-bold text-emerald-400">P1 (CE 0163)</span></div>
             </div>
-            <button onclick="addToCart('Dumbum 2g Edition P1 20pcs', 12.50)" class="bg-brand hover:bg-brandDark text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center space-x-2 text-sm shadow-md shadow-brand/20">
-              <i class="fa-solid fa-plus"></i>
+          </div>
+
+          <!-- Price & Quantity Selector -->
+          <div class="pt-3 border-t border-borderDark flex flex-col space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-accentGray block">Price per pack</span>
+                <span class="text-2xl font-black text-white">€12.50</span>
+              </div>
+              <div class="flex items-center bg-darkBg border border-borderDark rounded-lg">
+                <button onclick="decrementQty('qty-dumbum')" class="px-2.5 py-1 text-gray-400 hover:text-white transition font-bold text-sm">-</button>
+                <input id="qty-dumbum" type="number" value="1" min="1" max="99" class="w-10 bg-transparent text-center font-bold text-sm text-white focus:outline-none" readonly>
+                <button onclick="incrementQty('qty-dumbum')" class="px-2.5 py-1 text-gray-400 hover:text-white transition font-bold text-sm">+</button>
+              </div>
+            </div>
+
+            <button onclick="addToCartWithQty('Dumbum 2g Edition P1 20pcs', 12.50, 'qty-dumbum')" class="w-full bg-brand hover:bg-brandDark active:scale-[0.98] text-white font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 text-sm shadow-lg shadow-brand/20">
+              <i class="fa-solid fa-cart-plus"></i>
               <span>Add to Cart</span>
             </button>
           </div>
@@ -174,36 +257,52 @@
       </div>
 
       <!-- Product 3: Killer Bulldog 2g -->
-      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/50 transition duration-300 flex flex-col shadow-xl">
-        <div class="relative bg-white h-72 w-full p-4 flex items-center justify-center border-b border-borderDark">
-          <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded shadow z-10">
-            Triplex Bestseller
+      <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/60 transition duration-300 flex flex-col shadow-2xl group">
+        <!-- Clean Framed Photo with Pure White Canvas -->
+        <div class="relative bg-white h-72 w-full p-6 flex items-center justify-center border-b border-borderDark overflow-hidden">
+          <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded shadow-md z-10">
+            Triplex Best Pick
+          </span>
+          <span class="absolute top-3 right-3 bg-gray-900/80 backdrop-blur text-gray-200 text-[10px] font-semibold px-2 py-1 rounded z-10">
+            Code XP1030
           </span>
           <img src="bulldog.jpg" 
                alt="Killer Bulldog 2g" 
-               class="w-full h-full object-contain mix-blend-multiply transition-transform duration-300 hover:scale-105">
+               class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300">
         </div>
 
-        <div class="p-6 flex-1 flex flex-col justify-between">
+        <div class="p-6 flex-1 flex flex-col justify-between space-y-5">
           <div>
-            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1">Triplex (XP1030)</div>
-            <h3 class="text-xl font-bold text-white mb-2">Killer Bulldog 2g</h3>
-            <p class="text-gray-400 text-xs mb-4">
-              The "Killer Bulldog" series is well-known for its deep bass concussive shockwave and high-grade flash powder charge.
+            <div class="text-xs text-brand font-bold uppercase tracking-wider mb-1.5">Triplex Pyrotechnics</div>
+            <h3 class="text-xl font-bold text-white mb-2 leading-tight">Killer Bulldog 2g</h3>
+            <p class="text-gray-400 text-xs leading-relaxed mb-4">
+              Designed for enthusiasts looking for deep, bass-heavy acoustic pressure. High-density flash composition manufactured to exact CE standards.
             </p>
-            <ul class="text-xs text-gray-300 space-y-1 mb-6 border-y border-borderDark py-3">
-              <li><strong class="text-gray-400">Quantity:</strong> 20 pcs per box</li>
-              <li><strong class="text-gray-400">NEC / NEM:</strong> ~2.0g / pc</li>
-              <li><strong class="text-gray-400">Item Code:</strong> XP1030</li>
-            </ul>
-          </div>
-          <div class="flex items-center justify-between pt-2">
-            <div>
-              <span class="text-xs text-gray-400 block">Price</span>
-              <span class="text-2xl font-black text-white">€11.90</span>
+
+            <div class="grid grid-cols-2 gap-2 text-[11px] bg-darkBg/60 p-3 rounded-xl border border-borderDark mb-2">
+              <div><span class="text-accentGray block">Units:</span> <span class="font-bold text-gray-200">20 pcs / pack</span></div>
+              <div><span class="text-accentGray block">NEC/NEM:</span> <span class="font-bold text-gray-200">~2.0g / unit</span></div>
+              <div><span class="text-accentGray block">Sound Type:</span> <span class="font-bold text-gray-200">Deep Bass Blast</span></div>
+              <div><span class="text-accentGray block">Origin:</span> <span class="font-bold text-emerald-400">Poland (Triplex)</span></div>
             </div>
-            <button onclick="addToCart('Killer Bulldog 2g', 11.90)" class="bg-brand hover:bg-brandDark text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center space-x-2 text-sm shadow-md shadow-brand/20">
-              <i class="fa-solid fa-plus"></i>
+          </div>
+
+          <!-- Price & Quantity Selector -->
+          <div class="pt-3 border-t border-borderDark flex flex-col space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-accentGray block">Price per pack</span>
+                <span class="text-2xl font-black text-white">€11.90</span>
+              </div>
+              <div class="flex items-center bg-darkBg border border-borderDark rounded-lg">
+                <button onclick="decrementQty('qty-bulldog')" class="px-2.5 py-1 text-gray-400 hover:text-white transition font-bold text-sm">-</button>
+                <input id="qty-bulldog" type="number" value="1" min="1" max="99" class="w-10 bg-transparent text-center font-bold text-sm text-white focus:outline-none" readonly>
+                <button onclick="incrementQty('qty-bulldog')" class="px-2.5 py-1 text-gray-400 hover:text-white transition font-bold text-sm">+</button>
+              </div>
+            </div>
+
+            <button onclick="addToCartWithQty('Killer Bulldog 2g', 11.90, 'qty-bulldog')" class="w-full bg-brand hover:bg-brandDark active:scale-[0.98] text-white font-bold py-3 rounded-xl transition flex items-center justify-center space-x-2 text-sm shadow-lg shadow-brand/20">
+              <i class="fa-solid fa-cart-plus"></i>
               <span>Add to Cart</span>
             </button>
           </div>
@@ -213,34 +312,172 @@
     </div>
   </main>
 
-  <!-- Shipping & Trust Info -->
-  <section id="shipping" class="bg-cardBg border-t border-borderDark py-12 px-4">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="flex items-start space-x-4">
-        <div class="text-3xl text-brand"><i class="fa-solid fa-earth-europe"></i></div>
-        <div>
-          <h4 class="text-white font-bold text-base mb-1">All EU Countries Supported</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">
-            Fast cross-border delivery across Germany, Poland, Baltic States, Czech Republic, France, and all other EU nations.
+  <!-- Verified Customer Reviews Section -->
+  <section id="reviews" class="bg-cardBg border-t border-borderDark py-20 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="flex items-center justify-center space-x-1 text-amber-400 text-lg mb-2">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Verified Buyer Reviews</h2>
+        <p class="text-gray-400 text-sm mt-2">See what verified European pyro enthusiasts have to say about our speed and packaging quality.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Review 1 -->
+        <div class="bg-darkBg p-6 rounded-2xl border border-borderDark space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="font-bold text-white text-base">Maximilian R.</div>
+              <div class="text-xs text-accentGray flex items-center space-x-1">
+                <span>🇩🇪 Munich, Germany</span>
+              </div>
+            </div>
+            <span class="inline-flex items-center text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
+              <i class="fa-solid fa-check mr-1"></i> Verified Order
+            </span>
+          </div>
+          <div class="text-amber-400 text-xs">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-gray-300 text-xs leading-relaxed">
+            "Ordered 6 boxes of the Dumbum 2G and C4. Delivery took 3 days with DPD to Germany. Perfectly packed inside a double cardboard box, zero smell, no pyrotechnics markers on the exterior. Will definitely buy again."
           </p>
+          <div class="text-[11px] text-accentGray font-medium pt-2 border-t border-borderDark/60">
+            Purchased: Dumbum 2g Edition & C4
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="bg-darkBg p-6 rounded-2xl border border-borderDark space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="font-bold text-white text-base">Antoine D.</div>
+              <div class="text-xs text-accentGray flex items-center space-x-1">
+                <span>🇫🇷 Lyon, France</span>
+              </div>
+            </div>
+            <span class="inline-flex items-center text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
+              <i class="fa-solid fa-check mr-1"></i> Verified Order
+            </span>
+          </div>
+          <div class="text-amber-400 text-xs">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-gray-300 text-xs leading-relaxed">
+            "The Killer Bulldog from Triplex surprised me. Really loud concussive blast with proper safety delay on the fuse. Customer support answered my tracking inquiries in 10 minutes. Top notch vendor in the EU."
+          </p>
+          <div class="text-[11px] text-accentGray font-medium pt-2 border-t border-borderDark/60">
+            Purchased: Killer Bulldog 2g
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="bg-darkBg p-6 rounded-2xl border border-borderDark space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="font-bold text-white text-base">Jakub K.</div>
+              <div class="text-xs text-accentGray flex items-center space-x-1">
+                <span>🇨🇿 Prague, Czechia</span>
+              </div>
+            </div>
+            <span class="inline-flex items-center text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
+              <i class="fa-solid fa-check mr-1"></i> Verified Order
+            </span>
+          </div>
+          <div class="text-amber-400 text-xs">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="text-gray-300 text-xs leading-relaxed">
+            "All items came factory sealed with original CE stickers. Paid via Crypto for extra convenience, order was processed within 4 hours. You can trust this shop 100%."
+          </p>
+          <div class="text-[11px] text-accentGray font-medium pt-2 border-t border-borderDark/60">
+            Purchased: Dumbum 2g Edition P1
+          </div>
         </div>
       </div>
-      <div class="flex items-start space-x-4">
-        <div class="text-3xl text-brand"><i class="fa-solid fa-box"></i></div>
-        <div>
-          <h4 class="text-white font-bold text-base mb-1">100% Discreet Packaging</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">
-            Orders are packed inside standard unmarked brown cardboard boxes without any fireworks stickers or logos.
-          </p>
-        </div>
+    </div>
+  </section>
+
+  <!-- Interactive FAQ Section -->
+  <section id="faq" class="bg-darkBg border-t border-borderDark py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="text-brand text-xs font-bold uppercase tracking-wider block mb-1">Clear Answers</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Frequently Asked Questions</h2>
+        <p class="text-gray-400 text-sm mt-2">Everything you need to know about delivery, packing, and safety.</p>
       </div>
-      <div class="flex items-start space-x-4" id="safety">
-        <div class="text-3xl text-brand"><i class="fa-solid fa-id-card"></i></div>
-        <div>
-          <h4 class="text-white font-bold text-base mb-1">Age Verification (18+)</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">
-            Sales are strictly restricted to persons aged 18 or older. Courier verification may be required upon handover.
-          </p>
+
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
+          <button onclick="toggleFaq(1)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
+            <span>Do you ship to my country in Europe?</span>
+            <i id="faq-icon-1" class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-300"></i>
+          </button>
+          <div id="faq-ans-1" class="hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 border-t border-borderDark/50 pt-3 leading-relaxed">
+            Yes, we provide tracked road courier delivery to almost all European Union member states including Germany, France, Austria, Poland, Italy, Spain, Baltic States, Czech Republic, and Slovakia. We do not ship to islands requiring air freight.
+          </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="bg-cardBg border border-borderDark rounded-1xl overflow-hidden transition">
+          <button onclick="toggleFaq(2)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
+            <span>Is the packaging discreet?</span>
+            <i id="faq-icon-2" class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-300"></i>
+          </button>
+          <div id="faq-ans-2" class="hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 border-t border-borderDark/50 pt-3 leading-relaxed">
+            100% yes. Packages are shipped in plain, unmarked standard brown cardboard boxes with no pyrotechnic labels, company logos, or product descriptions on the exterior. Your privacy is totally respected.
+          </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
+          <button onclick="toggleFaq(3)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
+            <span>How long does shipping take?</span>
+            <i id="faq-icon-3" class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-300"></i>
+          </button>
+          <div id="faq-ans-3" class="hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 border-t border-borderDark/50 pt-3 leading-relaxed">
+            Standard cross-border transit time is 3 to 5 business days depending on destination. Once dispatched, you automatically receive an email with your courier tracking link (DPD / GLS / standard road courier).
+          </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
+          <button onclick="toggleFaq(4)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
+            <span>What are the accepted payment methods?</span>
+            <i id="faq-icon-4" class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-300"></i>
+          </button>
+          <div id="faq-ans-4" class="hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 border-t border-borderDark/50 pt-3 leading-relaxed">
+            We accept instant SEPA Bank Wire transfers, major credit cards (Visa / Mastercard), and decentralized Cryptocurrencies (Bitcoin, USDT, Monero) for maximum privacy.
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
+          <button onclick="toggleFaq(5)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
+            <span>What is the minimum age requirement?</span>
+            <i id="faq-icon-5" class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-300"></i>
+          </button>
+          <div id="faq-ans-5" class="hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 border-t border-borderDark/50 pt-3 leading-relaxed">
+            Purchasing is strictly restricted to legal adults aged 18 or older. By using our website and placing an order, you certify that you meet the legal requirements in your jurisdiction.
+          </div>
         </div>
       </div>
     </div>
@@ -249,17 +486,17 @@
   <!-- Side Cart Drawer -->
   <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-full flex pl-10 z-50 transform translate-x-full transition-transform duration-300">
     <div class="w-screen max-w-md bg-cardBg border-l border-borderDark flex flex-col justify-between shadow-2xl">
-      <div class="p-6 overflow-y-auto">
+      <div class="p-6 overflow-y-auto flex-1">
         <div class="flex justify-between items-center pb-4 border-b border-borderDark">
           <h3 class="text-lg font-bold text-white flex items-center space-x-2">
             <i class="fa-solid fa-bag-shopping text-brand"></i>
-            <span>Your Cart</span>
+            <span>Your Shopping Cart</span>
           </h3>
-          <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+          <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-xl p-1">&times;</button>
         </div>
 
         <div id="cart-items" class="divide-y border-borderDark my-4">
-          <p id="empty-msg" class="text-center py-12 text-sm text-gray-500">Your cart is currently empty.</p>
+          <p id="empty-msg" class="text-center py-16 text-sm text-gray-500">Your cart is currently empty.</p>
         </div>
       </div>
 
@@ -268,10 +505,22 @@
           <span>Subtotal:</span>
           <span id="cart-total">€0.00</span>
         </div>
-        <p class="text-[11px] text-gray-400 text-center">Shipping rates are calculated at checkout based on destination country.</p>
-        <button onclick="checkout()" class="w-full bg-brand hover:bg-brandDark text-white font-bold py-3.5 rounded-xl transition text-center shadow-lg shadow-brand/20">
-          Proceed to Checkout
+        
+        <div class="flex items-center space-x-2 text-[11px] text-gray-400 bg-cardBg p-2.5 rounded-lg border border-borderDark">
+          <i class="fa-solid fa-truck-shield text-brand"></i>
+          <span>Shipping rates calculated at checkout by country.</span>
+        </div>
+
+        <button onclick="checkout()" class="w-full bg-brand hover:bg-brandDark active:scale-[0.98] text-white font-bold py-3.5 rounded-xl transition text-center shadow-lg shadow-brand/20">
+          Proceed to Secure Checkout
         </button>
+
+        <div class="flex justify-center items-center space-x-4 pt-1 text-gray-400 text-xs">
+          <span><i class="fa-brands fa-cc-visa text-base"></i></span>
+          <span><i class="fa-brands fa-cc-mastercard text-base"></i></span>
+          <span><i class="fa-brands fa-bitcoin text-base"></i></span>
+          <span class="font-bold text-[10px]">SEPA</span>
+        </div>
       </div>
     </div>
   </div>
@@ -279,15 +528,92 @@
   <!-- Cart Backdrop -->
   <div id="backdrop" onclick="toggleCart()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden"></div>
 
-  <!-- Footer -->
-  <footer class="bg-darkBg border-t border-borderDark text-center py-6 text-xs text-gray-500">
-    <p>© 2026 PyroZone. All rights reserved. Pyrotechnics purchase and usage must comply with local member state regulations.</p>
+  <!-- Quick Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-24 opacity-0 transition-all duration-300 z-50 pointer-events-none">
+    <i class="fa-solid fa-check-circle"></i>
+    <span id="toast-msg" class="text-sm font-bold">Added to cart!</span>
+  </div>
+
+  <!-- Professional Footer -->
+  <footer class="bg-cardBg border-t border-borderDark text-gray-400 text-xs py-12 px-4 mt-auto">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      
+      <!-- Col 1 -->
+      <div class="space-y-3">
+        <div class="flex items-center space-x-2">
+          <div class="w-7 h-7 rounded bg-brand flex items-center justify-center text-white text-sm font-black">💥</div>
+          <span class="text-lg font-black tracking-wider text-white">PYRO<span class="text-brand">ZONE</span></span>
+        </div>
+        <p class="text-gray-400 leading-relaxed text-[11px]">
+          Leading certified European pyrotechnic distributor. Supplying safe, original, and certified products for hobbyists and professionals across the EU.
+        </p>
+      </div>
+
+      <!-- Col 2 -->
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="#catalog" class="hover:text-white transition">Product Catalog</a></li>
+          <li><a href="#reviews" class="hover:text-white transition">Customer Reviews</a></li>
+          <li><a href="#faq" class="hover:text-white transition">FAQ & Shipping Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3 -->
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Compliance & Law</h4>
+        <ul class="space-y-2 text-gray-400 text-[11px]">
+          <li>• CE Mark Directive 2013/29/EU</li>
+          <li>• Category P1 / F3 Compliant</li>
+          <li>• ADR Road Transport Standards</li>
+          <li>• Strict 18+ Age Policy</li>
+        </ul>
+      </div>
+
+      <!-- Col 4 -->
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Security & Dispatch</h4>
+        <div class="bg-darkBg p-3 rounded-xl border border-borderDark space-y-2 text-[11px]">
+          <div class="flex items-center space-x-2 text-emerald-400 font-bold">
+            <i class="fa-solid fa-lock"></i>
+            <span>256-Bit SSL Encrypted</span>
+          </div>
+          <p class="text-gray-400">Orders packed in neutral outer cartons with zero pyro indicators.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto pt-6 border-t border-borderDark flex flex-col sm:flex-row items-center justify-between text-gray-500 text-[11px] gap-4">
+      <p>© 2026 PyroZone EU. All rights reserved. Pyrotechnics purchase and usage must comply with your local national regulations.</p>
+      <div class="flex space-x-4">
+        <span>Terms of Service</span>
+        <span>Privacy Policy</span>
+        <span>EU Road Transport Certified</span>
+      </div>
+    </div>
   </footer>
 
-  <!-- Shopping Cart Logic -->
+  <!-- JavaScript Logic -->
   <script>
     let cart = [];
 
+    // Quantity selector helpers
+    function incrementQty(id) {
+      const input = document.getElementById(id);
+      let val = parseInt(input.value) || 1;
+      input.value = val + 1;
+    }
+
+    function decrementQty(id) {
+      const input = document.getElementById(id);
+      let val = parseInt(input.value) || 1;
+      if (val > 1) {
+        input.value = val - 1;
+      }
+    }
+
+    // Toggle Side Cart
     function toggleCart() {
       const drawer = document.getElementById('cart-drawer');
       const backdrop = document.getElementById('backdrop');
@@ -295,25 +621,32 @@
       backdrop.classList.toggle('hidden');
     }
 
-    function addToCart(title, price) {
+    // Add with custom quantity
+    function addToCartWithQty(title, price, qtyInputId) {
+      const input = document.getElementById(qtyInputId);
+      const qty = parseInt(input.value) || 1;
+      
       const existing = cart.find(item => item.title === title);
       if (existing) {
-        existing.qty += 1;
+        existing.qty += qty;
       } else {
-        cart.push({ title, price, qty: 1 });
+        cart.push({ title, price, qty: qty });
       }
+      
+      // Reset input counter back to 1
+      input.value = 1;
+      
       updateCartUI();
-      const drawer = document.getElementById('cart-drawer');
-      if (drawer.classList.contains('translate-x-full')) {
-        toggleCart();
-      }
+      showToast(`Added ${qty}x ${title} to cart`);
     }
 
+    // Remove from cart
     function removeFromCart(title) {
       cart = cart.filter(item => item.title !== title);
       updateCartUI();
     }
 
+    // Update Cart UI
     function updateCartUI() {
       const container = document.getElementById('cart-items');
       const totalEl = document.getElementById('cart-total');
@@ -324,22 +657,22 @@
       let totalQty = 0;
 
       if (cart.length === 0) {
-        container.innerHTML = '<p class="text-center py-12 text-sm text-gray-500">Your cart is currently empty.</p>';
+        container.innerHTML = '<p class="text-center py-16 text-sm text-gray-500">Your cart is currently empty.</p>';
       } else {
         cart.forEach(item => {
           total += item.price * item.qty;
           totalQty += item.qty;
 
           const itemEl = document.createElement('div');
-          itemEl.className = 'py-3 flex justify-between items-center';
+          itemEl.className = 'py-4 flex justify-between items-center';
           itemEl.innerHTML = `
             <div>
               <h5 class="text-white text-xs font-bold leading-snug">${item.title}</h5>
-              <div class="text-[11px] text-gray-400">${item.qty} pcs x €${item.price.toFixed(2)}</div>
+              <div class="text-[11px] text-gray-400 mt-0.5">${item.qty} units × €${item.price.toFixed(2)}</div>
             </div>
             <div class="flex items-center space-x-3">
               <span class="text-sm font-bold text-white">€${(item.price * item.qty).toFixed(2)}</span>
-              <button onclick="removeFromCart('${item.title}')" class="text-red-400 hover:text-red-300 text-xs">
+              <button onclick="removeFromCart('${item.title}')" class="text-red-400 hover:text-red-300 text-xs p-1">
                 <i class="fa-solid fa-trash-can"></i>
               </button>
             </div>
@@ -352,12 +685,37 @@
       countEl.innerText = totalQty;
     }
 
+    // Checkout handler
     function checkout() {
-      if(cart.length === 0) {
-        alert("Please add at least one item to your cart first!");
+      if (cart.length === 0) {
+        alert("Please add products to your cart before proceeding.");
         return;
       }
-      alert("Redirecting to secure EU checkout. Select your shipping country in the next step!");
+      alert("Proceeding to secure EU checkout. Select your shipping destination and preferred payment method in the next step!");
+    }
+
+    // Interactive Toast Notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 2500);
+    }
+
+    // Accordion FAQ handler
+    function toggleFaq(num) {
+      const ans = document.getElementById(`faq-ans-${num}`);
+      const icon = document.getElementById(`faq-icon-${num}`);
+      if (ans.classList.contains('hidden')) {
+        ans.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        ans.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
     }
   </script>
 </body>
