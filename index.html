@@ -9,6 +9,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -789,7 +791,7 @@
         <!-- Formspree Endpoint Form -->
         <form id="shipping-form" action="https://formspree.io/f/xjyyanvg" method="POST" onsubmit="processOrder(event)" class="space-y-4 text-xs">
           
-          <!-- Hidden inputs for Formspree email generation -->
+          <!-- Hidden inputs for Formspree / Email details -->
           <input type="hidden" name="Order_Reference" id="fs-order-ref">
           <input type="hidden" name="Total_Due" id="fs-total">
           <input type="hidden" name="Cart_Items" id="fs-items">
@@ -876,7 +878,7 @@
         </form>
       </div>
 
-      <!-- STEP 2: Bank Transfer Invoice Screen -->
+      <!-- STEP 2: Bank Transfer Invoice Screen (Updated with your Bank Details) -->
       <div id="checkout-step-2" class="p-6 sm:p-8 space-y-5 hidden">
         <div class="text-center space-y-1">
           <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto text-xl">
@@ -889,13 +891,14 @@
         <div class="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl text-center space-y-1">
           <div class="text-xs font-bold text-emerald-400 flex items-center justify-center space-x-1.5">
             <i class="fa-solid fa-envelope-circle-check"></i>
-            <span>Order Dispatched to Queue</span>
+            <span>Payment Instructions Sent to Email</span>
           </div>
           <p class="text-[11px] text-gray-300">
-            A confirmation record has been logged for: <strong id="summary-email-copy" class="text-white"></strong>. You can safely save these details or take a screenshot.
+            A confirmation email has been dispatched to: <strong id="summary-email-copy" class="text-white"></strong>. You can safely save these details or take a screenshot.
           </p>
         </div>
 
+        <!-- Bank Details Card -->
         <div class="bg-darkBg p-4 rounded-xl border border-borderDark space-y-3 text-xs">
           <div class="flex justify-between pb-2 border-b border-borderDark">
             <span class="text-gray-400">Payment Reference (CRITICAL):</span>
@@ -907,19 +910,19 @@
           </div>
           <div class="flex justify-between">
             <span class="text-gray-400">Account Holder:</span>
-            <span class="font-bold text-white">PyroZone Logistics EU</span>
+            <span class="font-bold text-white">Arijus Šacikauskas</span>
           </div>
           <div class="flex justify-between">
             <span class="text-gray-400">Bank Name:</span>
-            <span class="font-bold text-white">European Commercial Bank (SEPA)</span>
+            <span class="font-bold text-white">SEB Bankas</span>
           </div>
           <div class="flex justify-between">
             <span class="text-gray-400">IBAN:</span>
-            <span class="font-mono font-bold text-emerald-400 text-[11px] sm:text-xs">DE89 3704 0044 0532 0130 00</span>
+            <span class="font-mono font-bold text-emerald-400 text-[11px] sm:text-xs">LT76 7044 0901 0671 4200</span>
           </div>
           <div class="flex justify-between">
             <span class="text-gray-400">BIC / SWIFT:</span>
-            <span class="font-mono font-bold text-white">DRESDEFFXXX</span>
+            <span class="font-mono font-bold text-white">CBVILT2X</span>
           </div>
         </div>
 
@@ -1004,9 +1007,21 @@
     let cart = [];
     const SHIPPING_COST = 14.00;
 
-    // ACTIVE ENDPOINTS
+    // ACTIVE EMAILJS INTEGRATION KEYS
+    const EMAILJS_PUBLIC_KEY = "l0BwHF9xoqJVr40QE";
+    const EMAILJS_SERVICE_ID = "service_rxyzw43";
+    const EMAILJS_TEMPLATE_ID = "template_a8v5kab";
+
+    // FORM & SHEET BACKUPS
     const FORMSPREE_URL = "https://formspree.io/f/xjyyanvg";
     const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwyaHjcXuQb8B3WGXsaCKGcNH_oBluFINwcS6gQyYMSDJMyrhjZl2VQdjR46P4lghFbCQ/exec";
+
+    // Initialize EmailJS SDK
+    (function() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+      }
+    })();
 
     function generateUniqueOrderCode() {
       const timestamp = Date.now().toString().slice(-6); 
@@ -1120,7 +1135,7 @@
       document.getElementById('checkout-modal').classList.add('hidden');
     }
 
-    // SUBMIT ORDER VIA FORMSPREE AJAX + GOOGLE SHEETS SYNC
+    // PROCESS ORDER: SENDS EMAIL VIA EMAILJS + LOGS VIA FORMSPREE & GOOGLE SHEETS
     async function processOrder(e) {
       e.preventDefault();
       
@@ -1133,7 +1148,32 @@
       let grandTotal = (subtotal + SHIPPING_COST).toFixed(2);
       const itemsFormatted = cart.map(i => `${i.qty}x ${i.title}`).join(', ');
 
-      // Populate hidden inputs
+      const name = document.getElementById('cust-name').value;
+      const phone = document.getElementById('cust-phone').value;
+      const email = document.getElementById('cust-email').value;
+      const country = document.getElementById('cust-country').value;
+      const city = document.getElementById('cust-city').value;
+      const carrier = document.getElementById('cust-carrier').value;
+      const locker = document.getElementById('cust-locker').value;
+
+      // 1. DIRECT EMAIL DELIVERY TO BUYER VIA EMAILJS
+      const templateParams = {
+        to_name: name,
+        to_email: email,
+        order_id: orderNum,
+        total: `€${grandTotal}`,
+        items: itemsFormatted,
+        locker: `${carrier} - ${locker} (${city}, ${country})`,
+        phone: phone
+      };
+
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+      } catch (mailErr) {
+        console.warn("EmailJS delivery failed or queued", mailErr);
+      }
+
+      // 2. BACKUP LOGGING TO FORMSPREE
       document.getElementById('fs-order-ref').value = orderNum;
       document.getElementById('fs-total').value = `€${grandTotal}`;
       document.getElementById('fs-items').value = itemsFormatted;
@@ -1141,28 +1181,17 @@
       const form = document.getElementById('shipping-form');
       const formData = new FormData(form);
 
-      const phone = document.getElementById('cust-phone').value;
-      const email = document.getElementById('cust-email').value;
-      const carrier = document.getElementById('cust-carrier').value;
-      const locker = document.getElementById('cust-locker').value;
-      const name = document.getElementById('cust-name').value;
-      const country = document.getElementById('cust-country').value;
-      const city = document.getElementById('cust-city').value;
-
-      // 1. Submit to Formspree via AJAX (Vanilla JS)
       try {
         await fetch(FORMSPREE_URL, {
           method: 'POST',
           body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
+          headers: { 'Accept': 'application/json' }
         });
-      } catch (err) {
-        console.warn("Formspree request failed", err);
+      } catch (fsErr) {
+        console.warn("Formspree logging offline", fsErr);
       }
 
-      // 2. Backup post to Google Sheets webhook
+      // 3. BACKUP LOGGING TO GOOGLE SHEETS
       const orderPayload = {
         orderId: orderNum,
         dateTime: new Date().toLocaleString('en-GB'),
@@ -1184,11 +1213,11 @@
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(orderPayload)
         });
-      } catch (err) {
-        console.warn("Sheet backup offline", err);
+      } catch (sheetErr) {
+        console.warn("Google Sheet backup offline", sheetErr);
       }
 
-      // 3. Display Step 2 Bank Info
+      // 4. DISPLAY ON-SCREEN CONFIRMATION
       document.getElementById('order-ref').innerText = orderNum;
       document.getElementById('order-ref-reminder').innerText = orderNum;
       document.getElementById('order-final-amount').innerText = `€${grandTotal}`;
