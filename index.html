@@ -786,27 +786,34 @@
           <span><strong>100% Anonymous:</strong> No home street address required. Your order will be deposited into the automated locker terminal of your choice.</span>
         </div>
 
-        <form id="shipping-form" onsubmit="processOrder(event)" class="space-y-4 text-xs">
+        <!-- Formspree Endpoint Form -->
+        <form id="shipping-form" action="https://formspree.io/f/xjyyanvg" method="POST" onsubmit="processOrder(event)" class="space-y-4 text-xs">
+          
+          <!-- Hidden inputs for Formspree email generation -->
+          <input type="hidden" name="Order_Reference" id="fs-order-ref">
+          <input type="hidden" name="Total_Due" id="fs-total">
+          <input type="hidden" name="Cart_Items" id="fs-items">
+
           <div>
             <label class="block text-gray-300 font-semibold mb-1">Recipient Name / Nickname</label>
-            <input required type="text" id="cust-name" placeholder="John Doe" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
+            <input required type="text" name="Recipient_Name" id="cust-name" placeholder="John Doe" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label class="block text-gray-300 font-semibold mb-1">Phone Number <span class="text-brand font-bold">*SMS Locker Code</span></label>
-              <input required type="tel" id="cust-phone" placeholder="+49 170 000000 / +33..." class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
+              <input required type="tel" name="Phone_Number" id="cust-phone" placeholder="+49 170 000000 / +33..." class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             </div>
             <div>
               <label class="block text-gray-300 font-semibold mb-1">Email Address <span class="text-brand font-bold">*Payment Copy Sent Here</span></label>
-              <input required type="email" id="cust-email" placeholder="john@example.com" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
+              <input required type="email" name="email" id="cust-email" placeholder="john@example.com" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             </div>
           </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-gray-300 font-semibold mb-1">Locker Country (EU)</label>
-              <select id="cust-country" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
+              <select name="Locker_Country" id="cust-country" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
                 <option value="Austria">Austria</option>
                 <option value="Belgium">Belgium</option>
                 <option value="Bulgaria">Bulgaria</option>
@@ -835,13 +842,13 @@
             </div>
             <div>
               <label class="block text-gray-300 font-semibold mb-1">City / Town</label>
-              <input required type="text" id="cust-city" placeholder="e.g. Berlin, Warsaw, Prague, Paris" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
+              <input required type="text" name="City" id="cust-city" placeholder="e.g. Berlin, Warsaw, Prague, Paris" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             </div>
           </div>
 
           <div>
             <label class="block text-gray-300 font-semibold mb-1">Parcel Locker Network (Operator)</label>
-            <select id="cust-carrier" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand font-semibold">
+            <select name="Locker_Network" id="cust-carrier" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand font-semibold">
               <option value="InPost Paczkomat">InPost Paczkomat</option>
               <option value="DPD Pickup Locker">DPD Pickup Locker / Automat</option>
               <option value="DHL Packstation">DHL Packstation</option>
@@ -853,7 +860,7 @@
 
           <div>
             <label class="block text-gray-300 font-semibold mb-1">Parcel Locker Name, Code or Address</label>
-            <input required type="text" id="cust-locker" placeholder="e.g. InPost: WAW04A OR DPD Locker: Berlin Alexanderplatz" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
+            <input required type="text" name="Locker_Terminal" id="cust-locker" placeholder="e.g. InPost: WAW04A OR DPD Locker: Berlin Alexanderplatz" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             <span class="text-[10px] text-accentGray mt-1 block">Copy the exact locker address or terminal code from your courier's locker map.</span>
           </div>
 
@@ -882,10 +889,10 @@
         <div class="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl text-center space-y-1">
           <div class="text-xs font-bold text-emerald-400 flex items-center justify-center space-x-1.5">
             <i class="fa-solid fa-envelope-circle-check"></i>
-            <span>Payment Instructions Sent to Email</span>
+            <span>Order Dispatched to Queue</span>
           </div>
           <p class="text-[11px] text-gray-300">
-            A copy of these instructions has been sent to: <strong id="summary-email-copy" class="text-white"></strong>. You can safely close this window anytime.
+            A confirmation record has been logged for: <strong id="summary-email-copy" class="text-white"></strong>. You can safely save these details or take a screenshot.
           </p>
         </div>
 
@@ -997,7 +1004,8 @@
     let cart = [];
     const SHIPPING_COST = 14.00;
 
-    // ACTIVE GOOGLE SHEETS WEBHOOK ENDPOINT
+    // ACTIVE ENDPOINTS
+    const FORMSPREE_URL = "https://formspree.io/f/xjyyanvg";
     const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwyaHjcXuQb8B3WGXsaCKGcNH_oBluFINwcS6gQyYMSDJMyrhjZl2VQdjR46P4lghFbCQ/exec";
 
     function generateUniqueOrderCode() {
@@ -1112,6 +1120,7 @@
       document.getElementById('checkout-modal').classList.add('hidden');
     }
 
+    // SUBMIT ORDER VIA FORMSPREE AJAX + GOOGLE SHEETS SYNC
     async function processOrder(e) {
       e.preventDefault();
       
@@ -1122,16 +1131,38 @@
       const orderNum = generateUniqueOrderCode();
       let subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
       let grandTotal = (subtotal + SHIPPING_COST).toFixed(2);
-
-      const name = document.getElementById('cust-name').value;
-      const phone = document.getElementById('cust-phone').value;
-      const email = document.getElementById('cust-email').value;
-      const country = document.getElementById('cust-country').value;
-      const city = document.getElementById('cust-city').value;
-      const carrier = document.getElementById('cust-carrier').value;
-      const locker = document.getElementById('cust-locker').value;
       const itemsFormatted = cart.map(i => `${i.qty}x ${i.title}`).join(', ');
 
+      // Populate hidden inputs
+      document.getElementById('fs-order-ref').value = orderNum;
+      document.getElementById('fs-total').value = `€${grandTotal}`;
+      document.getElementById('fs-items').value = itemsFormatted;
+
+      const form = document.getElementById('shipping-form');
+      const formData = new FormData(form);
+
+      const phone = document.getElementById('cust-phone').value;
+      const email = document.getElementById('cust-email').value;
+      const carrier = document.getElementById('cust-carrier').value;
+      const locker = document.getElementById('cust-locker').value;
+      const name = document.getElementById('cust-name').value;
+      const country = document.getElementById('cust-country').value;
+      const city = document.getElementById('cust-city').value;
+
+      // 1. Submit to Formspree via AJAX (Vanilla JS)
+      try {
+        await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+      } catch (err) {
+        console.warn("Formspree request failed", err);
+      }
+
+      // 2. Backup post to Google Sheets webhook
       const orderPayload = {
         orderId: orderNum,
         dateTime: new Date().toLocaleString('en-GB'),
@@ -1154,9 +1185,10 @@
           body: JSON.stringify(orderPayload)
         });
       } catch (err) {
-        console.warn("Sheet logging offline or network busy", err);
+        console.warn("Sheet backup offline", err);
       }
 
+      // 3. Display Step 2 Bank Info
       document.getElementById('order-ref').innerText = orderNum;
       document.getElementById('order-ref-reminder').innerText = orderNum;
       document.getElementById('order-final-amount').innerText = `€${grandTotal}`;
