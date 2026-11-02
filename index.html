@@ -9,8 +9,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -788,10 +786,10 @@
           <span><strong>100% Anonymous:</strong> No home street address required. Your order will be deposited into the automated locker terminal of your choice.</span>
         </div>
 
-        <!-- Formspree Endpoint Form -->
+        <!-- Order Submission Form -->
         <form id="shipping-form" action="https://formspree.io/f/xjyyanvg" method="POST" onsubmit="processOrder(event)" class="space-y-4 text-xs">
           
-          <!-- Hidden inputs for Formspree / Email details -->
+          <!-- Hidden inputs for Formspree / Sheets -->
           <input type="hidden" name="Order_Reference" id="fs-order-ref">
           <input type="hidden" name="Total_Due" id="fs-total">
           <input type="hidden" name="Cart_Items" id="fs-items">
@@ -831,6 +829,7 @@
                 <option value="Ireland">Ireland</option>
                 <option value="Italy">Italy</option>
                 <option value="Latvia">Latvia</option>
+                <option value="Lithuania">Lithuania</option>
                 <option value="Luxembourg">Luxembourg</option>
                 <option value="Netherlands">Netherlands</option>
                 <option value="Poland">Poland</option>
@@ -844,7 +843,7 @@
             </div>
             <div>
               <label class="block text-gray-300 font-semibold mb-1">City / Town</label>
-              <input required type="text" name="City" id="cust-city" placeholder="e.g. Berlin, Warsaw, Prague, Paris" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
+              <input required type="text" name="City" id="cust-city" placeholder="e.g. Berlin, Warsaw, Prague, Vilnius" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             </div>
           </div>
 
@@ -852,6 +851,7 @@
             <label class="block text-gray-300 font-semibold mb-1">Parcel Locker Network (Operator)</label>
             <select name="Locker_Network" id="cust-carrier" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand font-semibold">
               <option value="InPost Paczkomat">InPost Paczkomat</option>
+              <option value="Omniva">Omniva Locker</option>
               <option value="DPD Pickup Locker">DPD Pickup Locker / Automat</option>
               <option value="DHL Packstation">DHL Packstation</option>
               <option value="Packeta / Z-BOX">Packeta / Z-BOX</option>
@@ -878,7 +878,7 @@
         </form>
       </div>
 
-      <!-- STEP 2: Bank Transfer Invoice Screen (Updated with your Bank Details) -->
+      <!-- STEP 2: Bank Transfer Invoice Screen -->
       <div id="checkout-step-2" class="p-6 sm:p-8 space-y-5 hidden">
         <div class="text-center space-y-1">
           <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto text-xl">
@@ -987,13 +987,13 @@
       <div>
         <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Pickup</h4>
         <p class="text-gray-400 text-[11px] leading-relaxed">
-          InPost Paczkomat, DPD Pickup, DHL Packstation, Packeta, and GLS locker networks supported throughout Europe.
+          InPost Paczkomat, Omniva, DPD Pickup, DHL Packstation, Packeta, and GLS locker networks supported throughout Europe.
         </p>
       </div>
     </div>
 
     <div class="max-w-7xl mx-auto pt-6 border-t border-borderDark flex flex-col sm:flex-row items-center justify-between text-gray-500 text-[11px] gap-4">
-      <p>© 2026 PyroZone EU. All rights reserved.</p>
+      <p>© 2026 PyroZone EU (pyrozone.online). All rights reserved.</p>
       <div class="flex space-x-4">
         <span>Terms of Service</span>
         <span>Privacy Policy</span>
@@ -1007,21 +1007,9 @@
     let cart = [];
     const SHIPPING_COST = 14.00;
 
-    // ACTIVE EMAILJS INTEGRATION KEYS
-    const EMAILJS_PUBLIC_KEY = "l0BwHF9xoqJVr40QE";
-    const EMAILJS_SERVICE_ID = "service_rxyzw43";
-    const EMAILJS_TEMPLATE_ID = "template_a8v5kab";
-
-    // FORM & SHEET BACKUPS
+    // ACTIVE ENDPOINTS
+    const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwga2ozpKwsmpd0jsE-7l7xZq1Qb9TmJh4zvYWKKbitBMe11HkQGRNgktXoTlg7wZ3g/exec";
     const FORMSPREE_URL = "https://formspree.io/f/xjyyanvg";
-    const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwyaHjcXuQb8B3WGXsaCKGcNH_oBluFINwcS6gQyYMSDJMyrhjZl2VQdjR46P4lghFbCQ/exec";
-
-    // Initialize EmailJS SDK
-    (function() {
-      if (typeof emailjs !== 'undefined') {
-        emailjs.init(EMAILJS_PUBLIC_KEY);
-      }
-    })();
 
     function generateUniqueOrderCode() {
       const timestamp = Date.now().toString().slice(-6); 
@@ -1135,7 +1123,7 @@
       document.getElementById('checkout-modal').classList.add('hidden');
     }
 
-    // PROCESS ORDER: SENDS EMAIL VIA EMAILJS + LOGS VIA FORMSPREE & GOOGLE SHEETS
+    // PROCESS ORDER: LOGS TO SHEET & DISPATCHES EMAIL VIA RESEND THROUGH APPS SCRIPT
     async function processOrder(e) {
       e.preventDefault();
       
@@ -1156,42 +1144,7 @@
       const carrier = document.getElementById('cust-carrier').value;
       const locker = document.getElementById('cust-locker').value;
 
-      // 1. DIRECT EMAIL DELIVERY TO BUYER VIA EMAILJS
-      const templateParams = {
-        to_name: name,
-        to_email: email,
-        order_id: orderNum,
-        total: `€${grandTotal}`,
-        items: itemsFormatted,
-        locker: `${carrier} - ${locker} (${city}, ${country})`,
-        phone: phone
-      };
-
-      try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-      } catch (mailErr) {
-        console.warn("EmailJS delivery failed or queued", mailErr);
-      }
-
-      // 2. BACKUP LOGGING TO FORMSPREE
-      document.getElementById('fs-order-ref').value = orderNum;
-      document.getElementById('fs-total').value = `€${grandTotal}`;
-      document.getElementById('fs-items').value = itemsFormatted;
-
-      const form = document.getElementById('shipping-form');
-      const formData = new FormData(form);
-
-      try {
-        await fetch(FORMSPREE_URL, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-      } catch (fsErr) {
-        console.warn("Formspree logging offline", fsErr);
-      }
-
-      // 3. BACKUP LOGGING TO GOOGLE SHEETS
+      // 1. PRIMARY BACKEND CALL: GOOGLE SHEETS + RESEND TRANSACTIONAL EMAIL
       const orderPayload = {
         orderId: orderNum,
         dateTime: new Date().toLocaleString('en-GB'),
@@ -1214,10 +1167,28 @@
           body: JSON.stringify(orderPayload)
         });
       } catch (sheetErr) {
-        console.warn("Google Sheet backup offline", sheetErr);
+        console.warn("Sheet & Resend dispatch offline or failed", sheetErr);
       }
 
-      // 4. DISPLAY ON-SCREEN CONFIRMATION
+      // 2. BACKUP FORM LOGGING TO FORMSPREE
+      document.getElementById('fs-order-ref').value = orderNum;
+      document.getElementById('fs-total').value = `€${grandTotal}`;
+      document.getElementById('fs-items').value = itemsFormatted;
+
+      const form = document.getElementById('shipping-form');
+      const formData = new FormData(form);
+
+      try {
+        await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+      } catch (fsErr) {
+        console.warn("Formspree backup offline", fsErr);
+      }
+
+      // 3. DISPLAY ON-SCREEN INVOICE CONFIRMATION
       document.getElementById('order-ref').innerText = orderNum;
       document.getElementById('order-ref-reminder').innerText = orderNum;
       document.getElementById('order-final-amount').innerText = `€${grandTotal}`;
