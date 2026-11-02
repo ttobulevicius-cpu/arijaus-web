@@ -116,8 +116,10 @@
           <span>Zero Home Address Shared</span>
         </div>
         <div class="flex items-center space-x-2.5 bg-cardBg/80 backdrop-blur px-4 py-2.5 rounded-xl border border-borderDark">
-          <i class="fa-solid fa-bolt text-purple-400 text-sm"></i>
-          <span>SEPA & Crypto Accepted</span>
+          <svg class="w-4 h-4 text-purple-400" viewBox="0 0 397 311" fill="currentColor">
+            <path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zM64.6 3.8C67 1.4 70.3 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8zm267.8 115.1c-2.4-2.4-5.7-3.8-9.2-3.8H5.8c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
+          </svg>
+          <span>SEPA & Solana Accepted</span>
         </div>
         <div class="flex items-center space-x-2.5 bg-cardBg/80 backdrop-blur px-4 py-2.5 rounded-xl border border-borderDark">
           <i class="fa-solid fa-comment-sms text-brand text-sm"></i>
@@ -601,7 +603,7 @@
             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
           </div>
           <p class="text-gray-300 text-xs leading-relaxed">
-            "Paid with Solana, got verified in seconds. Shipped directly to my automated parcel locker and picked up via SMS code 3 days later. Clean neutral box. Perfect service."
+            "Paid with Solana, sent my TXID by replying to the email, and had the parcel dispatched that afternoon. Picked up via SMS code 3 days later. Clean neutral box. Perfect service."
           </p>
           <div class="text-[11px] text-accentGray font-medium pt-2 border-t border-borderDark/60">
             Purchased: Classic dumbum 2g & Viper 1
@@ -709,11 +711,11 @@
 
         <div class="bg-cardBg border border-borderDark rounded-xl overflow-hidden transition">
           <button onclick="toggleFaq(5)" class="w-full p-5 text-left flex justify-between items-center text-white font-bold text-sm sm:text-base hover:text-brand transition">
-            <span>How do Crypto (Solana / Bitcoin) and SEPA Bank payments work?</span>
+            <span>How do SEPA Bank Wire and Solana payments work?</span>
             <i id="faq-icon-5" class="fa-solid fa-chevron-down text-xs text-gray-400 transition-transform duration-300"></i>
           </button>
           <div id="faq-ans-5" class="hidden px-5 pb-5 text-xs sm:text-sm text-gray-400 border-t border-borderDark/50 pt-3 leading-relaxed">
-            You can choose between SEPA Bank wire or direct Cryptocurrency (Solana SOL or Bitcoin BTC). When choosing Crypto, you will see the wallet address and QR code to transfer. Once sent, simply reply to your confirmation email with the transaction hash (TXID) and your parcel will be queued for immediate dispatch.
+            You can pay via regular European SEPA bank transfer or instantly using Solana (SOL / USDT-SPL). When choosing Solana, copy our wallet address or scan the QR code to transfer. Once sent, simply reply to your confirmation email with your Transaction ID (TXID) and Order ID, and your package will be queued for immediate dispatch.
           </div>
         </div>
 
@@ -806,7 +808,7 @@
               <input required type="tel" name="Phone_Number" id="cust-phone" placeholder="+370 / +49 / +33 / +44..." class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             </div>
             <div>
-              <label class="block text-gray-300 font-semibold mb-1">Email Address <span class="text-brand font-bold">*Payment Details Sent Here</span></label>
+              <label class="block text-gray-300 font-semibold mb-1">Email Address <span class="text-brand font-bold">*Payment Copy Sent Here</span></label>
               <input required type="email" name="email" id="cust-email" placeholder="john@example.com" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand">
             </div>
           </div>
@@ -851,7 +853,7 @@
             </div>
           </div>
 
-          <!-- Parcel Terminals (Available from Lithuania Dispatch Hub) -->
+          <!-- Terminals Available from Lithuania Hub -->
           <div>
             <label class="block text-gray-300 font-semibold mb-1">Parcel Locker Network (Operator)</label>
             <select name="Locker_Network" id="cust-carrier" class="w-full bg-darkBg border border-borderDark rounded-xl p-3 text-white focus:outline-none focus:border-brand font-semibold">
@@ -869,31 +871,31 @@
             <span class="text-[10px] text-accentGray mt-1 block">Specify your chosen terminal name or address (from the courier map).</span>
           </div>
 
-          <!-- Payment Method Selector -->
+          <!-- Clean 2-Way Payment Method Selector (Bank vs Solana) -->
           <div>
             <label class="block text-gray-300 font-semibold mb-1.5">Choose Payment Method</label>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              <label class="cursor-pointer border border-brand bg-brand/5 rounded-xl p-2.5 flex items-center space-x-2 transition" id="pm-card-sepa">
+            <div class="grid grid-cols-2 gap-3">
+              <label class="cursor-pointer border border-brand bg-brand/5 rounded-xl p-3 flex items-center space-x-2.5 transition" id="pm-card-sepa">
                 <input type="radio" name="payment_choice" value="SEPA Bank" checked onchange="selectPaymentMethod('SEPA Bank')" class="text-brand focus:ring-0">
-                <div>
-                  <div class="font-bold text-white text-xs">🏦 SEPA Wire</div>
-                  <div class="text-[10px] text-accentGray">EU Bank Transfer</div>
+                <div class="flex items-center space-x-2">
+                  <span class="text-base">🏦</span>
+                  <div>
+                    <div class="font-bold text-white text-xs">SEPA Wire</div>
+                    <div class="text-[10px] text-accentGray">EU Bank Transfer</div>
+                  </div>
                 </div>
               </label>
 
-              <label class="cursor-pointer border border-borderDark bg-darkBg rounded-xl p-2.5 flex items-center space-x-2 transition" id="pm-card-sol">
+              <label class="cursor-pointer border border-borderDark bg-darkBg rounded-xl p-3 flex items-center space-x-2.5 transition" id="pm-card-sol">
                 <input type="radio" name="payment_choice" value="Solana (SOL)" onchange="selectPaymentMethod('Solana (SOL)')" class="text-brand focus:ring-0">
-                <div>
-                  <div class="font-bold text-purple-400 text-xs">⚡ Solana (SOL)</div>
-                  <div class="text-[10px] text-accentGray">Near-zero fees</div>
-                </div>
-              </label>
-
-              <label class="cursor-pointer border border-borderDark bg-darkBg rounded-xl p-2.5 flex items-center space-x-2 transition" id="pm-card-btc">
-                <input type="radio" name="payment_choice" value="Bitcoin (BTC)" onchange="selectPaymentMethod('Bitcoin (BTC)')" class="text-brand focus:ring-0">
-                <div>
-                  <div class="font-bold text-amber-400 text-xs">₿ Bitcoin (BTC)</div>
-                  <div class="text-[10px] text-accentGray">Native Crypto</div>
+                <div class="flex items-center space-x-2">
+                  <svg class="w-4 h-4 text-purple-400 shrink-0" viewBox="0 0 397 311" fill="currentColor">
+                    <path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zM64.6 3.8C67 1.4 70.3 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8zm267.8 115.1c-2.4-2.4-5.7-3.8-9.2-3.8H5.8c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
+                  </svg>
+                  <div>
+                    <div class="font-bold text-purple-400 text-xs">Solana (SOL)</div>
+                    <div class="text-[10px] text-accentGray">Instant & 0 fees</div>
+                  </div>
                 </div>
               </label>
             </div>
@@ -921,14 +923,14 @@
         </form>
       </div>
 
-      <!-- STEP 2: Payment Screen (Dynamically Switches Bank vs Solana vs Bitcoin) -->
+      <!-- STEP 2: Payment Screen (SEPA vs Solana) -->
       <div id="checkout-step-2" class="p-6 sm:p-8 space-y-5 hidden">
         <div class="text-center space-y-1">
           <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto text-xl">
             <i class="fa-solid fa-cube"></i>
           </div>
           <h3 class="text-xl font-black text-white">Locker Order Reserved!</h3>
-          <p class="text-xs text-accentGray" id="invoice-subtitle">Complete your payment to queue your parcel for dispatch:</p>
+          <p class="text-xs text-accentGray">Complete payment below to queue your parcel for locker dispatch:</p>
         </div>
 
         <div class="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl text-center space-y-1">
@@ -941,7 +943,7 @@
           </p>
         </div>
 
-        <!-- 1. BANK INVOICE BOX (SEPA) -->
+        <!-- 1. BANK INVOICE BOX (SEPA - BIC REMOVED) -->
         <div id="invoice-box-sepa" class="bg-darkBg p-4 rounded-xl border border-borderDark space-y-3 text-xs">
           <div class="flex justify-between pb-2 border-b border-borderDark">
             <span class="text-gray-400">Payment Reference (CRITICAL):</span>
@@ -963,40 +965,47 @@
             <span class="text-gray-400">IBAN:</span>
             <span class="font-mono font-bold text-emerald-400 text-[11px] sm:text-xs">LT76 7044 0901 0671 4200</span>
           </div>
-          <div class="flex justify-between">
-            <span class="text-gray-400">BIC / SWIFT:</span>
-            <span class="font-mono font-bold text-white">CBVILT2X</span>
-          </div>
+          <p class="text-[11px] text-gray-400 text-center pt-2 border-t border-borderDark/60 leading-relaxed">
+            ⚡ <strong>Critical:</strong> Please copy your exact reference code (<strong id="order-ref-sepa-hint" class="text-brand font-mono"></strong>) into your bank transfer description.
+          </p>
         </div>
 
-        <!-- 2. SOLANA INVOICE BOX -->
-        <div id="invoice-box-solana" class="bg-darkBg p-4 rounded-xl border border-purple-500/30 space-y-3 text-xs text-center hidden">
+        <!-- 2. SOLANA INVOICE BOX (WITH CLEAR ORDER ID & TXID INSTRUCTIONS) -->
+        <div id="invoice-box-solana" class="bg-darkBg p-4 rounded-xl border border-purple-500/40 space-y-3 text-xs text-center hidden">
           <div class="flex justify-between items-center pb-2 border-b border-borderDark">
-            <span class="text-purple-400 font-bold">⚡ Solana Network (SOL / USDT-SPL)</span>
-            <span class="font-mono font-bold text-white" id="order-final-amount-sol">€0.00</span>
+            <div class="flex items-center space-x-1.5 text-purple-400 font-bold">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 397 311" fill="currentColor"><path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zM64.6 3.8C67 1.4 70.3 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8zm267.8 115.1c-2.4-2.4-5.7-3.8-9.2-3.8H5.8c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/></svg>
+              <span>Solana Network (SOL / USDT-SPL)</span>
+            </div>
+            <span class="font-mono font-black text-white text-sm" id="order-final-amount-sol">€0.00</span>
           </div>
-          <p class="text-[11px] text-gray-300 text-left">Send the equivalent euro amount to our Solana wallet address below:</p>
+
+          <!-- Prominent Order ID -->
+          <div class="bg-purple-500/10 border border-purple-500/30 p-2.5 rounded-lg flex items-center justify-between text-left">
+            <div>
+              <span class="text-[10px] text-accentGray block uppercase font-bold">Your Order ID:</span>
+              <span id="order-ref-sol" class="font-mono font-black text-purple-300 text-sm">#PZ-000000-XXX</span>
+            </div>
+            <button type="button" onclick="copyText('order-ref-sol')" class="bg-purple-600 hover:bg-purple-500 text-white px-2.5 py-1 rounded text-[11px] font-bold transition">Copy ID</button>
+          </div>
+
+          <p class="text-[11px] text-gray-300 text-left">Send the crypto equivalent to our Solana address below:</p>
+          
           <div class="bg-cardBg p-3 rounded-lg border border-borderDark text-purple-300 font-mono text-[11px] break-all select-all flex items-center justify-between">
             <span id="sol-wallet-txt">Fu3rKg6KymYAmSgTmRbdkSpiED6oJ2esdd4Wwe6F9CcS</span>
-            <button type="button" onclick="copyText('sol-wallet-txt')" class="ml-2 bg-purple-600 hover:bg-purple-700 text-white px-2 py-1 rounded text-[10px] font-bold">Copy</button>
+            <button type="button" onclick="copyText('sol-wallet-txt')" class="ml-2 bg-purple-600 hover:bg-purple-500 text-white px-2.5 py-1 rounded text-[10px] font-bold transition">Copy Address</button>
           </div>
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Fu3rKg6KymYAmSgTmRbdkSpiED6oJ2esdd4Wwe6F9CcS" alt="Solana QR" class="mx-auto rounded-lg border border-borderDark">
-          <p class="text-[10px] text-gray-400">Once sent, reply to your confirmation email with the <strong>Transaction ID (TXID)</strong> to dispatch your order.</p>
-        </div>
 
-        <!-- 3. BITCOIN INVOICE BOX -->
-        <div id="invoice-box-btc" class="bg-darkBg p-4 rounded-xl border border-amber-500/30 space-y-3 text-xs text-center hidden">
-          <div class="flex justify-between items-center pb-2 border-b border-borderDark">
-            <span class="text-amber-400 font-bold">₿ Bitcoin Network (BTC)</span>
-            <span class="font-mono font-bold text-white" id="order-final-amount-btc">€0.00</span>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Fu3rKg6KymYAmSgTmRbdkSpiED6oJ2esdd4Wwe6F9CcS" alt="Solana QR" class="mx-auto rounded-lg border border-borderDark shadow-lg">
+
+          <div class="bg-darkBg/90 border border-purple-500/30 p-3 rounded-xl text-left space-y-1">
+            <span class="font-bold text-white text-xs block">📋 Next Step:</span>
+            <p class="text-[11px] text-gray-300 leading-relaxed">
+              Once sent, <strong>reply directly to your confirmation email</strong> with:
+              <br>• Your <strong>Order ID</strong> (<span id="order-ref-sol-hint" class="font-mono text-purple-300 font-bold"></span>)
+              <br>• Your <strong>Transaction Hash / ID (TXID)</strong>
+            </p>
           </div>
-          <p class="text-[11px] text-gray-300 text-left">Send the equivalent euro amount to our Bitcoin wallet address below:</p>
-          <div class="bg-cardBg p-3 rounded-lg border border-borderDark text-amber-300 font-mono text-[11px] break-all select-all flex items-center justify-between">
-            <span id="btc-wallet-txt">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</span>
-            <button type="button" onclick="copyText('btc-wallet-txt')" class="ml-2 bg-amber-600 hover:bg-amber-700 text-white px-2 py-1 rounded text-[10px] font-bold">Copy</button>
-          </div>
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" alt="Bitcoin QR" class="mx-auto rounded-lg border border-borderDark">
-          <p class="text-[10px] text-gray-400">Once sent, reply to your confirmation email with your <strong>TXID / Hash</strong> to queue your parcel.</p>
         </div>
 
         <div class="bg-darkBg/60 p-3 rounded-xl border border-borderDark text-[11px] space-y-1">
@@ -1129,26 +1138,20 @@
 
       const cardSepa = document.getElementById('pm-card-sepa');
       const cardSol = document.getElementById('pm-card-sol');
-      const cardBtc = document.getElementById('pm-card-btc');
-
-      // Reset styles
-      [cardSepa, cardSol, cardBtc].forEach(c => {
-        c.className = "cursor-pointer border border-borderDark bg-darkBg rounded-xl p-2.5 flex items-center space-x-2 transition";
-      });
 
       if (method === "SEPA Bank") {
-        cardSepa.className = "cursor-pointer border border-brand bg-brand/5 rounded-xl p-2.5 flex items-center space-x-2 transition";
-      } else if (method === "Solana (SOL)") {
-        cardSol.className = "cursor-pointer border border-purple-500 bg-purple-500/10 rounded-xl p-2.5 flex items-center space-x-2 transition";
-      } else if (method === "Bitcoin (BTC)") {
-        cardBtc.className = "cursor-pointer border border-amber-500 bg-amber-500/10 rounded-xl p-2.5 flex items-center space-x-2 transition";
+        cardSepa.className = "cursor-pointer border border-brand bg-brand/5 rounded-xl p-3 flex items-center space-x-2.5 transition";
+        cardSol.className = "cursor-pointer border border-borderDark bg-darkBg rounded-xl p-3 flex items-center space-x-2.5 transition";
+      } else {
+        cardSepa.className = "cursor-pointer border border-borderDark bg-darkBg rounded-xl p-3 flex items-center space-x-2.5 transition";
+        cardSol.className = "cursor-pointer border border-purple-500 bg-purple-500/10 rounded-xl p-3 flex items-center space-x-2.5 transition";
       }
     }
 
     function copyText(elemId) {
       const text = document.getElementById(elemId).innerText;
       navigator.clipboard.writeText(text);
-      showToast("Address copied to clipboard!");
+      showToast("Copied to clipboard!");
     }
 
     function incrementQty(id) {
@@ -1300,7 +1303,7 @@
         locker: locker,
         items: itemsFormatted,
         total: `€${grandTotal}`,
-        paymentMethod: currentPaymentMethod // Sends Bank vs Solana vs Bitcoin
+        paymentMethod: currentPaymentMethod // Sends SEPA Bank or Solana (SOL)
       };
 
       try {
@@ -1332,7 +1335,7 @@
         console.warn("Formspree backup offline", fsErr);
       }
 
-      // 3. DISPLAY ON-SCREEN INVOICE CONFIRMATION MATCHING PAYMENT METHOD
+      // 3. DISPLAY ON-SCREEN INVOICE CONFIRMATION
       document.getElementById('summary-locker').innerText = `${carrier} - ${locker}`;
       document.getElementById('summary-country').innerText = `${city}, ${country}`;
       document.getElementById('summary-phone').innerText = phone;
@@ -1340,20 +1343,18 @@
 
       const boxSepa = document.getElementById('invoice-box-sepa');
       const boxSol = document.getElementById('invoice-box-solana');
-      const boxBtc = document.getElementById('invoice-box-btc');
 
       boxSepa.classList.add('hidden');
       boxSol.classList.add('hidden');
-      boxBtc.classList.add('hidden');
 
       if (currentPaymentMethod === "Solana (SOL)") {
         document.getElementById('order-final-amount-sol').innerText = `€${grandTotal}`;
+        document.getElementById('order-ref-sol').innerText = orderNum;
+        document.getElementById('order-ref-sol-hint').innerText = orderNum;
         boxSol.classList.remove('hidden');
-      } else if (currentPaymentMethod === "Bitcoin (BTC)") {
-        document.getElementById('order-final-amount-btc').innerText = `€${grandTotal}`;
-        boxBtc.classList.remove('hidden');
       } else {
         document.getElementById('order-ref-sepa').innerText = orderNum;
+        document.getElementById('order-ref-sepa-hint').innerText = orderNum;
         document.getElementById('order-final-amount-sepa').innerText = `€${grandTotal}`;
         boxSepa.classList.remove('hidden');
       }
@@ -1391,4 +1392,3 @@
   </script>
 </body>
 </html>
-```
