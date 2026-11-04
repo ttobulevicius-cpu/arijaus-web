@@ -360,7 +360,7 @@
 
       <!-- 7: Dumbum nano 40 pcs (€3) -->
       <div class="bg-cardBg border border-borderDark rounded-2xl overflow-hidden hover:border-brand/60 transition duration-300 flex flex-col shadow-2xl group">
-        <div class="relative bg-white h-72 w-p-6 flex items-center justify-center border-b border-borderDark overflow-hidden">
+        <div class="relative bg-white h-72 w-full p-6 flex items-center justify-center border-b border-borderDark overflow-hidden">
           <span class="absolute top-3 left-3 bg-teal-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded shadow-md z-10">40 Pack</span>
           <span class="absolute top-3 right-3 bg-gray-900/80 backdrop-blur text-gray-200 text-[10px] font-semibold px-2 py-1 rounded z-10">114 dB • F2</span>
           <img src="dumbum_nano.jpg" alt="Dumbum nano 40 pcs" class="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300">
@@ -923,7 +923,7 @@
         </form>
       </div>
 
-      <!-- STEP 2: Payment Screen (SEPA vs Solana) -->
+      <!-- STEP 2: Payment Screen (SEPA vs Solana with 1-Click Copy Buttons) -->
       <div id="checkout-step-2" class="p-6 sm:p-8 space-y-5 hidden">
         <div class="text-center space-y-1">
           <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto text-xl">
@@ -943,30 +943,43 @@
           </p>
         </div>
 
-        <!-- 1. BANK INVOICE BOX (SEPA - BIC REMOVED) -->
+        <!-- 1. BANK INVOICE BOX (SEPA - SIMPLIFIED WITH 1-CLICK COPY BUTTONS) -->
         <div id="invoice-box-sepa" class="bg-darkBg p-4 rounded-xl border border-borderDark space-y-3 text-xs">
-          <div class="flex justify-between pb-2 border-b border-borderDark">
-            <span class="text-gray-400">Payment Reference (CRITICAL):</span>
-            <span id="order-ref-sepa" class="font-black text-brand tracking-wider font-mono">#PZ-000000-XXX</span>
+          <!-- Recipient -->
+          <div class="bg-cardBg p-2.5 rounded-lg border border-borderDark flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-accentGray block uppercase font-bold">Recipient (Beneficiary):</span>
+              <span id="bank-recipient" class="font-bold text-white text-xs">Arijus Šacikauskas</span>
+            </div>
+            <button type="button" onclick="copyText('bank-recipient')" class="bg-borderDark hover:bg-cardBg text-gray-200 px-2.5 py-1 rounded text-[11px] font-bold border border-borderDark/80 transition">Copy</button>
           </div>
-          <div class="flex justify-between">
+
+          <!-- IBAN -->
+          <div class="bg-cardBg p-2.5 rounded-lg border border-emerald-500/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-accentGray block uppercase font-bold">Account Number (IBAN):</span>
+              <span id="bank-iban" class="font-mono font-bold text-emerald-400 text-xs sm:text-sm">LT76 7044 0901 0671 4200</span>
+            </div>
+            <button type="button" onclick="copyText('bank-iban')" class="bg-emerald-600 hover:bg-emerald-500 text-white px-2.5 py-1 rounded text-[11px] font-bold transition">Copy</button>
+          </div>
+
+          <!-- Payment Reference -->
+          <div class="bg-cardBg p-2.5 rounded-lg border border-brand/30 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-accentGray block uppercase font-bold">Payment Purpose / Reference:</span>
+              <span id="order-ref-sepa" class="font-mono font-black text-brand text-xs sm:text-sm">#PZ-000000-XXX</span>
+            </div>
+            <button type="button" onclick="copyText('order-ref-sepa')" class="bg-brand hover:bg-brandDark text-white px-2.5 py-1 rounded text-[11px] font-bold transition">Copy</button>
+          </div>
+
+          <!-- Amount -->
+          <div class="flex justify-between items-center px-1 pt-1">
             <span class="text-gray-400">Total Amount:</span>
-            <span class="font-bold text-white text-sm" id="order-final-amount-sepa">€0.00</span>
+            <span class="font-black text-white text-base" id="order-final-amount-sepa">€0.00</span>
           </div>
-          <div class="flex justify-between">
-            <span class="text-gray-400">Account Holder:</span>
-            <span class="font-bold text-white">Arijus Šacikauskas</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-gray-400">Bank Name:</span>
-            <span class="font-bold text-white">SEB Bankas</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-gray-400">IBAN:</span>
-            <span class="font-mono font-bold text-emerald-400 text-[11px] sm:text-xs">LT76 7044 0901 0671 4200</span>
-          </div>
+
           <p class="text-[11px] text-gray-400 text-center pt-2 border-t border-borderDark/60 leading-relaxed">
-            ⚡ <strong>Critical:</strong> Please copy your exact reference code (<strong id="order-ref-sepa-hint" class="text-brand font-mono"></strong>) into your bank transfer description.
+            ⚡ Open your bank app (Swedbank, Revolut, SEB, etc.), paste the details above, and transfer.
           </p>
         </div>
 
@@ -1354,7 +1367,6 @@
         boxSol.classList.remove('hidden');
       } else {
         document.getElementById('order-ref-sepa').innerText = orderNum;
-        document.getElementById('order-ref-sepa-hint').innerText = orderNum;
         document.getElementById('order-final-amount-sepa').innerText = `€${grandTotal}`;
         boxSepa.classList.remove('hidden');
       }
